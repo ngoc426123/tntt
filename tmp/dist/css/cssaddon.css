@@ -1,0 +1,8 @@
+dl.dl-horizontal:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+.mr{
+	margin-right: 5px;
+}
