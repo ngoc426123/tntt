@@ -12,7 +12,13 @@ class Baocaoadmin extends CI_Controller{
 		if(isset($_POST["loc"])){
 			// GET VALUE
 			// QUERY
-			$query="SELECT * FROM phanlop JOIN thieunhi ON phanlop.id_thieunhi = thieunhi.id_thieunhi JOIN lopgiaoly ON phanlop.id_lopgiaoly = lopgiaoly.id_lopgiaoly JOIN namhoc ON phanlop.id_namhoc = namhoc.id_namhoc JOIN hoctap ON phanlop.id_phanlop = hoctap.id_phanlop WHERE 1 AND namhoc.id_namhoc = {$_POST["zid_namhoc"]}";
+			$query="SELECT * 
+				FROM phanlop 
+					JOIN thieunhi ON phanlop.id_thieunhi = thieunhi.id_thieunhi 
+					JOIN lopgiaoly ON phanlop.id_lopgiaoly = lopgiaoly.id_lopgiaoly 
+					JOIN namhoc ON phanlop.id_namhoc = namhoc.id_namhoc 
+					JOIN hoctap ON phanlop.id_phanlop = hoctap.id_phanlop 
+				WHERE 1 AND namhoc.id_namhoc = {$_POST["zid_namhoc"]}";
 			$query_where="";
 			if($_POST["zid_lopgiaoly"]!=0){
 				$query_where.=" AND phanlop.id_lopgiaoly = '{$_POST["zid_lopgiaoly"]}'";

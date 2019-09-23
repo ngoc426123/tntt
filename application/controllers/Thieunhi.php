@@ -92,9 +92,88 @@ class Thieunhi extends CI_Controller{
 		$this->load->view("admin/index",$data);
 	}
 	public function danhsachlop(){
+		$this->load->model(array("model_thieunhi","model_namhoc","model_diemso","model_lopgiaoly","Model_lichsu"));
 		$id_namhoc=$_SESSION["thongtinhuynhtruong"]["id_namhoc"];
         $id_lopgiaoly=$_SESSION["thongtinhuynhtruong"]["id_lopgiaoly"];
-        $this->load->model("model_thieunhi");
+		if(isset($_POST["ok"])){
+			$id_thieunhi=$_POST["id_thieunhi"];
+			$id_phanlop = $this->model_thieunhi->themlop($id_thieunhi,$id_lopgiaoly,$id_namhoc);
+			if($id_phanlop != 0){
+				// THÊM ĐIỂM LUÔN
+				$value_diemso=array(
+					'id_phanlop' =>	$id_phanlop,
+					'dmieng_1'   =>	0,
+					'd15phut_1'  =>	0,
+					'd45phut_1'  =>	0,
+					'dthi_1'     =>	0,
+					'dmieng_2'   =>	0,
+					'd15phut_2'  =>	0,
+					'd45phut_2'  =>	0,
+					'dthi_2'     =>	0,
+				);
+				$this->model_diemso->set_value($value_diemso);
+				$this->model_diemso->them();
+				$data["alert"]=1;
+				// GHI LỊCH SỬ
+				$thieunhi_ls=$this->model_thieunhi->get_value($id_thieunhi);
+				$array_lichsu=array(
+					'lichsu'       => 'Thêm mới danh sách lớp',
+					'noidung'      => 'Trưởng <b class="text-red">'.$_SESSION["thongtinhuynhtruong"]["tenhuynhtruong"].'</b> thêm em <b class="text-green">'.$thieunhi_ls["tenthanh"].' '.$thieunhi_ls["hoten"].'</b> vào lớp <b class="text-light-blue">'.$_SESSION["thongtinhuynhtruong"]["tenlopgiaoly"].'</b>',
+					'nguoicapnhat' => $_SESSION['thongtinhuynhtruong']['id_huynhtruong'],
+					'loai'         => 	1,
+				);
+				$this->Model_lichsu->set_value($array_lichsu);
+				$this->Model_lichsu->them();
+				$data["alert"]=array(
+					"stt"     => "success",
+					"title"   => "Quản lý thiếu nhi",
+					"content" => "Thành công."	
+				);
+			}
+			else{
+				$data["alert"]=array(
+					"stt"     => "success",
+					"title"   => "Quản lý thiếu nhi",
+					"content" => "Thành công. Thiếu nhi này trước đó có điểm, kiểm tra thông tin điểm số em này."
+				);
+			}
+		}
+		if(isset($_POST["ok-transfer"])){
+			$id__thieunhi=$_POST["id_thieunhi"];
+			$id__lopgiaoly=$_POST["id_lopgiaoly"];
+			$id__phanlop=$_POST["id_phanlop"];
+			$tenlopgiaoly = $this->model_lopgiaoly->get_value($id__lopgiaoly)["tenlopgiaoly"];
+			$thieunhi_ls=$this->model_thieunhi->get_value($id__thieunhi);
+			$return=$this->model_thieunhi->chuyenlop($id__phanlop,$id__lopgiaoly);
+			if($return==1){
+				$data["alert"]=1;
+				// GHI LỊCH SỬ
+				$array_lichsu=array(
+					'lichsu'       => 'Chuyển lớp',
+					'noidung'      => 'Trưởng <b class="text-red">'.$_SESSION["thongtinhuynhtruong"]["tenhuynhtruong"].'</b> xóa em <b class="text-green">'.$thieunhi_ls["tenthanh"].' '.$thieunhi_ls["hoten"].'</b> khỏi lớp <b class="text-light-blue">'.$_SESSION["thongtinhuynhtruong"]["tenlopgiaoly"].'</b>',
+					'nguoicapnhat' => $_SESSION['thongtinhuynhtruong']['id_huynhtruong'],
+					'loai'         => 	1,
+				);
+			}
+			else{
+				$data["alert"]=2;
+				$array_lichsu=array(
+					'lichsu'       => 'Chuyển lớp',
+					'noidung'      => 'Trưởng <b class="text-red">'.$_SESSION["thongtinhuynhtruong"]["tenhuynhtruong"].'</b> chuyển em <b class="text-green">'.$thieunhi_ls["tenthanh"].' '.$thieunhi_ls["hoten"].'</b> vào lớp <b class="text-light-blue">'.$tenlopgiaoly.'</b>',
+					'nguoicapnhat' => $_SESSION['thongtinhuynhtruong']['id_huynhtruong'],
+					'loai'         => 	1,
+				);
+			}
+			// GHI LỊCH SỬ
+			$data["alert"]=array(
+				"stt"     => "success",
+				"title"   => "Quản lý thiếu nhi",
+				"content" => "Chuyển lớp thành công"	
+			);
+			$this->Model_lichsu->set_value($array_lichsu);
+			$this->Model_lichsu->them();
+		}
+        $data["lopgiaoly"]=$this->model_lopgiaoly->get_list();
         $data["result_tn"]=$this->model_thieunhi->get_danhsachlop($id_namhoc,$id_lopgiaoly);
 		$data["page_title"]="Danh sách thiếu nhi";
 		$id_phancong=$_SESSION["thongtinhuynhtruong"]["id_phancong"];
@@ -175,62 +254,6 @@ class Thieunhi extends CI_Controller{
 		$data["view_page"]="view_suathieunhi";
 		$this->load->view("admin/index",$data);
 	}
-	public function themdanhsach(){
-		$this->load->model("model_thieunhi");
-		$this->load->model('model_diemso');
-		$id_namhoc=$_SESSION["thongtinhuynhtruong"]["id_namhoc"];
-        $id_lopgiaoly=$_SESSION["thongtinhuynhtruong"]["id_lopgiaoly"];
-		if(isset($_POST["ok"])){
-			$id_thieunhi=$_POST["id_thieunhi"];
-			$id_phanlop = $this->model_thieunhi->themlop($id_thieunhi,$id_lopgiaoly,$id_namhoc);
-			if($id_phanlop != 0){
-				// THÊM ĐIỂM LUÔN
-				$value_diemso=array(
-					'id_phanlop' =>	$id_phanlop,
-					'dmieng_1'   =>	0,
-					'd15phut_1'  =>	0,
-					'd45phut_1'  =>	0,
-					'dthi_1'     =>	0,
-					'dmieng_2'   =>	0,
-					'd15phut_2'  =>	0,
-					'd45phut_2'  =>	0,
-					'dthi_2'     =>	0,
-				);
-				$this->model_diemso->set_value($value_diemso);
-				$this->model_diemso->them();
-				$data["alert"]=1;
-				// GHI LỊCH SỬ
-				$thieunhi_ls=$this->model_thieunhi->get_value($id_thieunhi);
-				$array_lichsu=array(
-					'lichsu'       => 'Thêm mới danh sách lớp',
-					'noidung'      => 'Trưởng <b class="text-red">'.$_SESSION["thongtinhuynhtruong"]["tenhuynhtruong"].'</b> thêm em <b class="text-green">'.$thieunhi_ls["tenthanh"].' '.$thieunhi_ls["hoten"].'</b> vào lớp <b class="text-light-blue">'.$_SESSION["thongtinhuynhtruong"]["tenlopgiaoly"].'</b>',
-					'nguoicapnhat' => $_SESSION['thongtinhuynhtruong']['id_huynhtruong'],
-					'loai'         => 	1,
-				);
-				$this->load->model("Model_lichsu");
-				$this->Model_lichsu->set_value($array_lichsu);
-				$this->Model_lichsu->them();
-				$data["alert"]=array(
-					"stt"     => "success",
-					"title"   => "Quản lý thiếu nhi",
-					"content" => "Thành công."	
-				);
-			}
-			else{
-				$data["alert"]=array(
-					"stt"     => "success",
-					"title"   => "Quản lý thiếu nhi",
-					"content" => "Thành công. Thiếu nhi này trước đó có điểm, kiểm tra thông tin điểm số em này."
-				);
-			}
-		}
-        $this->load->model("model_thieunhi");
-        $data["result_tn"]=$this->model_thieunhi->get_danhsachlop($id_namhoc,$id_lopgiaoly);
-		$data["view_page"]="view_themdanhsach";
-		$data["page_title"]="Thêm danh sách";
-		$data["loged_user"]=$_SESSION["thongtinhuynhtruong"];
-		$this->load->view("admin/index",$data);
-	}
 	public function show(){
 		$mathieunhi=trim($_POST["mathieunhi"]);
 		$query=$this->db->query("SELECT * FROM thieunhi WHERE mathieunhi LIKE '$mathieunhi'");
@@ -244,14 +267,13 @@ class Thieunhi extends CI_Controller{
 	<?php
 		foreach ($result as $key => $value) {
 	?>
-
 		<div class="form-group">
 			<dl class="dl-horizontal">
 	            <dt>Mã Thiếu Nhi</dt><dd class ="text-red"><?php echo $value["mathieunhi"]; ?></dd>
 	            <dt>Họ tên</dt><dd><?php echo $value["tenthanh"]." ".$value["hoten"]; ?></dd>
 	            <dt>Ngày sinh</dt><dd><?php echo $value["ngaysinh"]; ?></dd>
 	        </dl>
-	        <form method="post" action="<?php echo base_url("thieunhi/themdanhsach") ?>">
+	        <form method="post" action="<?php echo base_url("thieunhi/danhsachlop") ?>">
 		        <input type="hidden" value="<?php echo $value["id_thieunhi"]; ?>" name="id_thieunhi">
 		        <input type="submit" name="ok" class="btn btn-block btn-success" value="Thêm vào lớp em này">
 	        </form>
@@ -259,55 +281,6 @@ class Thieunhi extends CI_Controller{
 		<hr>
 	<?php
 		}
-	}
-	public function chuyenlop(){
-		$this->load->model("model_thieunhi");
-		$id_namhoc=$_SESSION["thongtinhuynhtruong"]["id_namhoc"];
-        $id_lopgiaoly_ht=$_SESSION["thongtinhuynhtruong"]["id_lopgiaoly"];
-        $id_thieunhi=$_POST["id_thieunhi"];
-        $id_phanlop=$_POST["id_phanlop"];
-		if(isset($_POST["ok"])){
-			$id_lopgiaoly=$_POST["lopgiaoly"];
-			$this->load->model("model_lopgiaoly");
-			$tenlopgiaoly = $this->model_lopgiaoly->get_value($id_lopgiaoly)["tenlopgiaoly"];
-			$thieunhi_ls=$this->model_thieunhi->get_value($id_thieunhi);
-			$return=$this->model_thieunhi->chuyenlop($id_phanlop,$id_lopgiaoly);
-			if($return==1){
-				$data["alert"]=1;
-				// GHI LỊCH SỬ
-				$array_lichsu=array(
-					'lichsu'       => 'Chuyển lớp',
-					'noidung'      => 'Trưởng <b class="text-red">'.$_SESSION["thongtinhuynhtruong"]["tenhuynhtruong"].'</b> xóa em <b class="text-green">'.$thieunhi_ls["tenthanh"].' '.$thieunhi_ls["hoten"].'</b> khỏi lớp <b class="text-light-blue">'.$_SESSION["thongtinhuynhtruong"]["tenlopgiaoly"].'</b>',
-					'nguoicapnhat' => $_SESSION['thongtinhuynhtruong']['id_huynhtruong'],
-					'loai'         => 	1,
-				);
-			}
-			else{
-				$data["alert"]=2;
-				$array_lichsu=array(
-					'lichsu'       => 'Chuyển lớp',
-					'noidung'      => 'Trưởng <b class="text-red">'.$_SESSION["thongtinhuynhtruong"]["tenhuynhtruong"].'</b> chuyển em <b class="text-green">'.$thieunhi_ls["tenthanh"].' '.$thieunhi_ls["hoten"].'</b> vào lớp <b class="text-light-blue">'.$tenlopgiaoly.'</b>',
-					'nguoicapnhat' => $_SESSION['thongtinhuynhtruong']['id_huynhtruong'],
-					'loai'         => 	1,
-				);
-			}
-			// GHI LỊCH SỬ
-			$data["alert"]=array(
-				"stt"     => "success",
-				"title"   => "Quản lý thiếu nhi",
-				"content" => "Chuyển lớp thành công"	
-			);
-			$this->load->model("Model_lichsu");
-			$this->Model_lichsu->set_value($array_lichsu);
-			$this->Model_lichsu->them();
-		}
-        $data["result"]=$this->model_thieunhi->get_value($id_thieunhi);
-        $data["result_tn"]=$this->model_thieunhi->get_danhsachlop($id_namhoc,$id_lopgiaoly_ht);
-		$data["id_phanlop"]=$_POST["id_phanlop"];
-		$data["view_page"]="view_chuyenlop";
-		$data["page_title"]="Chuyển lớp";
-		$data["loged_user"]=$_SESSION["thongtinhuynhtruong"];
-		$this->load->view("admin/index",$data);
 	}
 	public function showdel(){
 		$this->load->model("model_thieunhi");

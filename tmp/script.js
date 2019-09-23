@@ -193,41 +193,6 @@ $(document).ready(function(){
             }
         });
     });
-    // $(".btn-info-thieunhi").click(function(){
-    //     id_thieunhi = $(this).attr("data-id");
-    //     data = JSON.parse($.ajax({
-    //         url:link_ajax.home_url+'thieunhi/show_info_thieunhi',
-    //         data:{"id_thieunhi":id_thieunhi},
-    //         type:'POST',
-    //         async:true,
-    //     }).responseText);
-    //     $("#hoten").text(data.hoten);
-    //     $("#tenthanh").text(data.tenthanh);
-    //     $("#gioitinh").text((data.gioitinh==1)?"Nam":"Nữ");
-    //     $("#ngaysinh").text(data.ngaysinh);
-    //     $("#sdt").text(data.sdt);
-    //     $("#mathieunhi").text(data.mathieunhi);
-    //     $("#diachi").text(data.diachi);
-    //     $("#khugiao").text(data.khugiao);
-    //     $("#tinhtrang").html((data.tinhtrang==1)?'<span class="label label-success">Còn sinh hoạt</span>':'<span class="label label-danger">Nghỉ sinh hoạt</span>');
-    //     $("#ruatoi").text((data.daruatoi==1)?'Ngày '+data.ngayruatoi+' do linh mục '+data.linhmucruatoi+' tại '+data.nhathoruatoi+'':'Chưa rửa tội');
-    //     $("#ruocle").text((data.daruocle==1)?'Ngày '+data.ngayruocle+' do linh mục '+data.linhmucruocle+' tại '+data.nhathoruocle+'':'Chưa rước lễ');
-    //     $("#themsuc").text((data.dathemsuc==1)?'Ngày '+data.ngaythemsuc+' do linh mục '+data.linhmucthemsuc+' tại '+data.nhathothemsuc+'':'Chưa thêm sức');
-    //     $("#hotencha").text(data.tenthanhcha+' '+data.hotencha);
-    //     $("#dienthoaicha").text(data.dienthoaicha);
-    //     $("#hotenme").text(data.tenthanhme+' '+data.hotenme);
-    //     $("#dienthoaime").text(data.dienthoaime);
-    //     $("#diemmieng_hk1").text(data.diemmieng_hk1);
-    //     $("#diem15p_hk1").text(data.diem15p_hk1);
-    //     $("#diem45p_hk1").text(data.diem45p_hk1);
-    //     $("#diemthi_hk1").text(data.diethi_hk1);
-    //     $("#trungbinh_hk1").text(data.trungbinh_hk1);
-    //     $("#diemmieng_hk2").text(data.diemmieng_hk2);
-    //     $("#diem15p_hk2").text(data.diem15p_hk2);
-    //     $("#diem45p_hk2").text(data.diem45p_hk2);
-    //     $("#diemthi_hk2").text(data.diethi_hk2);
-    //     $("#trungbinh_hk2").text(data.trungbinh_hk2);
-    // });
     $(".btn-info-thieunhi").click(function(){
         id_thieunhi = $(this).attr("data-id");
         $.ajax({
@@ -266,6 +231,24 @@ $(document).ready(function(){
                 $("#modal-info").modal('show');
             }
         });
-        
+    });
+    $(".btn-transfer-thieunhi").click(function(){
+        id_thieunhi = $(this).attr("data-id-thieunhi");
+        id_phanlop = $(this).attr("data-id-phanlop");
+        $.ajax({
+            url:link_ajax.home_url+'thieunhi/show_info_thieunhi',
+            data:{"id_thieunhi":id_thieunhi},
+            type:'POST',
+            async:true,
+            success:function(e){
+                data=JSON.parse(e);
+                $("#mathieunhi_").text(data.mathieunhi);
+                $("#hoten_").text(data.hoten);
+                $("#ngaysinh_").text(data.ngaysinh);
+                $("#id_thieunhi").val(id_thieunhi);
+                $("#id_phanlop").val(id_phanlop);
+                $("#modal-transfer").modal('show');
+            }
+        });
     });
 });

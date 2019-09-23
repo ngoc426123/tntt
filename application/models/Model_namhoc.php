@@ -19,7 +19,7 @@ class Model_namhoc extends CI_Model{
 		return $value_namhoc;
 	}
 	public function get_list(){
-		$query=$this->db->query("SELECT * FROM namhoc");
+		$query=$this->db->query("SELECT * FROM namhoc ORDER BY tennamhoc");
         $result=$query->result_array();
         return $result;
 	}

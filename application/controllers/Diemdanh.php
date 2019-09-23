@@ -24,6 +24,21 @@ class Diemdanh extends CI_Controller{
 	        $this->load->model("model_thieunhi");
 	        $data["result_tn"]=$this->model_thieunhi->get_danhsachlop($id_namhoc,$id_lopgiaoly);
 		}
+		else{
+			$data["thang"]=$thang=date('m');
+			$data["nam"]=$nam=date('Y');
+			$days_in_month = date('t',mktime(0,0,0,$thang,1,$nam));
+            for($i=1;$i<=$days_in_month;$i++){
+              	if(date('N',mktime(0,0,0,$thang,$i,$nam))==7){
+                	$sunday[]=$i;
+              	}
+            }
+            $data["sunday"]=$sunday;
+			$id_namhoc=$_SESSION["thongtinhuynhtruong"]["id_namhoc"];
+	        $id_lopgiaoly=$_SESSION["thongtinhuynhtruong"]["id_lopgiaoly"];
+	        $this->load->model("model_thieunhi");
+	        $data["result_tn"]=$this->model_thieunhi->get_danhsachlop($id_namhoc,$id_lopgiaoly);
+		}
 		$data["loged_user"]=$_SESSION["thongtinhuynhtruong"];
 		$data["page_title"]="Điểm danh";
 		$data["view_page"]="view_diemdanh";

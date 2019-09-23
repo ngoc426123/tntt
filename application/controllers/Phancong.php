@@ -10,20 +10,24 @@ class Phancong extends CI_Controller{
 		$this->model_function->checkadmin(base_url()."admin");
 	}
 	public function index(){
+		$this->load->model(array("model_namhoc","model_lopgiaoly","model_huynhtruong"));
+		$data["namhoc"]=$this->model_namhoc->get_list();
+		$data["lopgiaoly"]=$this->model_lopgiaoly->get_list();
+		$data["huynhtruong"]=$this->model_huynhtruong->get_list(1);
 		$data["loged_user"]=$_SESSION["thongtinhuynhtruong"];
 		$data["page_title"]="Phân công";
 		$data["view_page"]="view_phancong.php";
 		$this->load->view("admin/index",$data);
 	}
 	public function add(){
-		$this->load->model("model_huynhtruong");
+		$this->load->model(array("model_huynhtruong","model_phancong"));
 		if(isset($_POST["ok"])){
 			$id_namhoc      = $_POST["id_namhoc"];
 			$id_huynhtruong = $_POST["id_huynhtruong"];
 			$id_lopgiaoly   = $_POST["id_lopgiaoly"];
-			$sql_chk=$this->db->query("SELECT * FROM phancong WHERE id_huynhtruong='$id_huynhtruong' AND id_namhoc='$id_namhoc'");
-			$sql_chk_ht=$this->model_huynhtruong->get_value($id_huynhtruong);
-			if($sql_chk->num_rows()>0 ){
+			$check_nh = $this->model_phancong->check($id_huynhtruong,$id_namhoc);
+			$sql_chk_ht = $this->model_huynhtruong->get_value($id_huynhtruong);
+			if($check_nh == false){
 				$data["alert"]=array(
 					"stt"     => "danger",
 					"title"   => "Phân công năm học",
@@ -40,7 +44,7 @@ class Phancong extends CI_Controller{
 			else{
 				$loged_user=$_SESSION["thongtinhuynhtruong"];
 				$id_admin=$loged_user["id_huynhtruong"];
-				// $this->db->query("INSERT INTO phancong VALUES('','$id_lopgiaoly','$id_huynhtruong','$id_namhoc')");
+				$this->model_phancong->add($id_lopgiaoly,$id_huynhtruong,$id_namhoc);
 				// GHI LỊCH SỬ
 				$this->load->model("Model_huynhtruong");
 				$huynhtruong_ls=$this->Model_huynhtruong->get_value($id_huynhtruong);
@@ -65,6 +69,10 @@ class Phancong extends CI_Controller{
 				);
 			}
 		}
+		$this->load->model(array("model_namhoc","model_lopgiaoly","model_huynhtruong"));
+		$data["namhoc"]=$this->model_namhoc->get_list();
+		$data["lopgiaoly"]=$this->model_lopgiaoly->get_list();
+		$data["huynhtruong"]=$this->model_huynhtruong->get_list(1);
 		$data["loged_user"]=$_SESSION["thongtinhuynhtruong"];
 		$data["page_title"]="Phân công";
 		$data["view_page"]="view_phancong.php";
@@ -92,11 +100,9 @@ class Phancong extends CI_Controller{
 		$this->load->view("admin/index",$data);
 	}
 	public function edit($id_phancong){
+		$this->load->model(array("model_phancong"));
 		$id_lopgiaoly=$_POST["id_lopgiaoly"];
-		$id_admin=$_SESSION["thongtinhuynhtruong"]["id_huynhtruong"];
-		$this->db->query("UPDATE phancong SET 
-			id_lopgiaoly='$id_lopgiaoly'
-		WHERE id_phancong='$id_phancong'");
+		$check_nh = $this->model_phancong->edit($id_phancong,$id_lopgiaoly);
 		$data["alert"]=array(
 			"stt"     => "success",
 			"title"   => "Quản lý phân công",
@@ -108,13 +114,11 @@ class Phancong extends CI_Controller{
 		$data["id"]=$id_phancong;
 		$this->load->view("admin/index",$data);
 
-		$query_pc=$this->db->query("SELECT * FROM phancong WHERE id_phancong='$id_phancong'");
-		$result_pc=$query_pc->row_array();
+		// GHI LỊCH SỬ
+		$result_pc=$this->model_phancong->get_value($id_phancong);
 		$id_huynhtruong=$result_pc["id_huynhtruong"];
 		$id_lopgiaoly=$result_pc["id_lopgiaoly"];
 		$id_namhoc=$result_pc["id_namhoc"];
-
-		// GHI LỊCH SỬ
 		$this->load->model("Model_huynhtruong");
 		$huynhtruong_ls=$this->Model_huynhtruong->get_value($id_huynhtruong);
 		$this->load->model("Model_lopgiaoly");

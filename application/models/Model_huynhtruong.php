@@ -44,6 +44,22 @@ class Model_huynhtruong extends CI_Model{
 		$value_huynhtruong["tinhtrang"]      = $result["tinhtrang"];
 		return $value_huynhtruong;
 	}
+	public function get_list($stt){
+		if(isset($stt)){
+			$query=$this->db->query("SELECT * 
+				FROM huynhtruong 
+				WHERE tinhtrang={$stt} AND mahuynhtruong!='HT161016' 
+				ORDER BY id_huynhtruong");
+		}
+		else{
+			$query=$this->db->query("SELECT * 
+				FROM huynhtruong 
+				WHERE mahuynhtruong!='HT161016' 
+				ORDER BY id_huynhtruong");
+		}
+		$result=$query->result_array();
+		return $result;
+	}
 	public function them(){
 		$now=getdate();
 		$year=$now["year"];

@@ -36,11 +36,8 @@
                                 <label for="lopgiaoly" class="col-sm-3 control-label">Lớp giáo lý</label>
                                 <div class="col-sm-9">
                                     <select class="form-control" id="lopgiaoly" name="id_lopgiaoly">
-                                        <?php 
-                                        $sql_lgl=$this->db->query("SELECT * FROM lopgiaoly ORDER BY douutien");
-                                        $result_lgl=$sql_lgl->result_array();
-                                        foreach ($result_lgl as $value_lgl) 
-                                        {
+                                        <?php
+                                        foreach ($lopgiaoly as $value_lgl){
                                             ?>
                                             <option value="<?php echo $value_lgl["id_lopgiaoly"] ?>"><?php echo $value_lgl["tenlopgiaoly"] ?></option>  
                                             <?php
@@ -54,10 +51,7 @@
                                 <div class="col-sm-9">
                                     <select class="form-control" id="huynhtruong" name="id_huynhtruong">
                                         <?php 
-                                        $sql_ht=$this->db->query("SELECT * FROM huynhtruong WHERE mahuynhtruong!='HT161016' ORDER BY hoten");
-                                        $result_ht=$sql_ht->result_array();
-                                        foreach ($result_ht as $value_ht) 
-                                        {
+                                        foreach ($huynhtruong as $value_ht){
                                             ?>
                                             <option value="<?php echo $value_ht["id_huynhtruong"] ?>"><?php echo $value_ht["tenthanh"]." ".$value_ht["hoten"] ?></option> 
                                             <?php
@@ -85,11 +79,7 @@
                                     <select class="form-control" id="chonnamhoc" name="namhoc">
                                         <option value="#">--------Chọn Năm Học--------</option>
                                         <?php 
-                                        $this->load->database();
-                                        $sql_nh=$this->db->query("SELECT * FROM namhoc ORDER BY tennamhoc");
-                                        $result_nh=$sql_nh->result_array();
-                                        foreach ($result_nh as $value_nh) 
-                                        {
+                                        foreach ($namhoc as $value_nh){
                                             ?>
                                             <option value="<?php echo $value_nh["id_namhoc"] ?>"><?php echo $value_nh["tennamhoc"] ?></option>
                                             <?php

@@ -15,9 +15,12 @@ class Model_lopgiaoly extends CI_Model{
 	public function get_value($id_lopgiaoly){
 		$query=$this->db->query("SELECT * FROM lopgiaoly WHERE id_lopgiaoly='$id_lopgiaoly'");
 		$result=$query->row_array();
-		$value_lopgiaoly["tenlopgiaoly"] = $result["tenlopgiaoly"];
-		$value_lopgiaoly["douutien"]     = $result["douutien"];
-		return $value_lopgiaoly;
+		return $result;
+	}
+	public function get_list(){
+		$query=$this->db->query("SELECT * FROM lopgiaoly ORDER BY douutien");
+		$result=$query->result_array();
+		return $result;
 	}
 	public function them(){
 		$query=$this->db->query("SELECT * FROM lopgiaoly ORDER BY douutien DESC");
