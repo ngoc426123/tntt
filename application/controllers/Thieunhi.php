@@ -64,11 +64,12 @@ class Thieunhi extends CI_Controller{
 					'ngaythemsuc'	=>	$_POST["ngaythemsuc"],
 					'linhmucthemsuc'=>	$_POST["linhmucthemsuc"],
 					'nhathothemsuc'	=>	$_POST["nhathothemsuc"],
+					'tinhtrang'	    =>	1,
 					'ngaythem'      =>  $ngaythem,
+					'ghichu'	    =>	$_POST["ghichu"],
 				);
 				$this->load->model("model_thieunhi");
-				$this->model_thieunhi->set_value($value_thieunhi);
-				$this->model_thieunhi->them();
+				$this->model_thieunhi->them($value_thieunhi);
 				$data["alert"]=array(
 					"stt"     => "success",
 					"title"   => "Quản lý Thiếu nhi",
@@ -199,6 +200,7 @@ class Thieunhi extends CI_Controller{
 			$tenthanh=mb_convert_case(trim($_POST["tenthanh"]), MB_CASE_TITLE,'utf-8');
 			$hoten=mb_convert_case(trim($_POST["hoten"]), MB_CASE_TITLE,'utf-8');
 			$value_thieunhi = array (
+				'id_thieunhi'   =>  $id,
 				'tenthanh'		=>	$tenthanh,
 				'hoten'			=>	$hoten,
 				'gioitinh'		=>	$_POST["gioitinh"],
@@ -227,10 +229,10 @@ class Thieunhi extends CI_Controller{
 				'ngaythemsuc'	=>	$_POST["ngaythemsuc"],
 				'linhmucthemsuc'=>	$_POST["linhmucthemsuc"],
 				'nhathothemsuc'	=>	$_POST["nhathothemsuc"],
+				'ghichu'    	=>	$_POST["ghichu"],
 			);
 			$this->load->model("model_thieunhi");
-			$this->model_thieunhi->set_value($value_thieunhi);
-			$this->model_thieunhi->sua($id);
+			$this->model_thieunhi->sua($value_thieunhi);
 			$this->model_thieunhi->tinhtrang($id,$_POST["tinhtrang"]);
 			$data["alert"]=array(
 				"stt"     => "success",

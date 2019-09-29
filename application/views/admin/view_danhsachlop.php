@@ -220,7 +220,7 @@ foreach ($result_tn as $key => $value) {
         </div>
         <div class="modal fade in" id="modal-info">
             <div class="modal-dialog">
-                <div class="box box-widget">
+                <div class="box box-widget widget-user">
                     <div class="widget-user-header bg-aqua-active">
                         <h3 class="widget-user-username" id="hoten"></h3>
                         <h5 class="widget-user-desc" id="tenthanh"></h5>

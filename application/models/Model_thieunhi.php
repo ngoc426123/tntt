@@ -1,69 +1,8 @@
 <?php
 class Model_thieunhi extends CI_Model{
-	private $tenthanh;
-	private $hoten;
-	private $gioitinh;
-	private $ngaysinh;
-	private $ngaybonmang;
-	private $diachi;
-	private $sdt;
-	private $khugiao;
-	private $tenthanhcha;
-	private $hotencha;
-	private $nghenghiepcha;
-	private $dienthoaicha;
-	private $tenthanhme;
-	private $hotenme;
-	private $nghenghiepme;
-	private $dienthoaime;
-	private $daruatoi;
-	private $ngayruatoi;
-	private $linhmucruatoi;
-	private $nhathoruatoi;
-	private $daruocle;
-	private $ngayruocle;
-	private $linhmucruocle;
-	private $nhathoruocle;
-	private $dathemsuc;
-	private $ngaythemsuc;
-	private $linhmucthemsuc;
-	private $nhathothemsuc;
-	private $tinhtrang=1;
-	private $ngaythem;
 	public function __construct(){
 		parent::__construct();
 		$this->load->database();
-	}
-	public function set_value($value_thieunhi){
-		$this->tenthanh       =	$value_thieunhi["tenthanh"];
-		$this->hoten          =	$value_thieunhi["hoten"];
-		$this->gioitinh       =	$value_thieunhi["gioitinh"];
-		$this->ngaysinh       =	$value_thieunhi["ngaysinh"];
-		$this->ngaybonmang    =	$value_thieunhi["ngaybonmang"];
-		$this->diachi         =	$value_thieunhi["diachi"];
-		$this->sdt            =	$value_thieunhi["sdt"];
-		$this->khugiao        =	$value_thieunhi["khugiao"];
-		$this->tenthanhcha    =	$value_thieunhi["tenthanhcha"];
-		$this->hotencha       =	$value_thieunhi["hotencha"];
-		$this->nghenghiepcha  =	$value_thieunhi["nghenghiepcha"];
-		$this->dienthoaicha   =	$value_thieunhi["dienthoaicha"];
-		$this->tenthanhme     =	$value_thieunhi["tenthanhme"];
-		$this->hotenme        =	$value_thieunhi["hotenme"];
-		$this->nghenghiepme   =	$value_thieunhi["nghenghiepme"];
-		$this->dienthoaime    =	$value_thieunhi["dienthoaime"];
-		$this->daruatoi       =	$value_thieunhi["daruatoi"];
-		$this->ngayruatoi     =	$value_thieunhi["ngayruatoi"];
-		$this->linhmucruatoi  =	$value_thieunhi["linhmucruatoi"];
-		$this->nhathoruatoi   =	$value_thieunhi["nhathoruatoi"];
-		$this->daruocle       =	$value_thieunhi["daruocle"];
-		$this->ngayruocle     =	$value_thieunhi["ngayruocle"];
-		$this->linhmucruocle  =	$value_thieunhi["linhmucruocle"];
-		$this->nhathoruocle   =	$value_thieunhi["nhathoruocle"];
-		$this->dathemsuc      =	$value_thieunhi["dathemsuc"];
-		$this->ngaythemsuc    =	$value_thieunhi["ngaythemsuc"];
-		$this->linhmucthemsuc =	$value_thieunhi["linhmucthemsuc"];
-		$this->nhathothemsuc  =	$value_thieunhi["nhathothemsuc"];
-		$this->ngaythem       =	$value_thieunhi["ngaythem"];
 	}
 	public function get_value($id_thieunhi){
 		$query=$this->db->query("SELECT * FROM thieunhi WHERE id_thieunhi='$id_thieunhi'");
@@ -94,73 +33,75 @@ class Model_thieunhi extends CI_Model{
 		$res = $sql->result_array();
 		return $res;
 	}
-	public function them(){
-		$mamoi=$this->model_function->get_ma($this->gioitinh);
+	public function them($value_thieunhi){
+		$mamoi=$this->model_function->get_ma($value_thieunhi['gioitinh']);
 		$this->db->query("INSERT INTO thieunhi VALUES(
 			NULL,
-			'$mamoi',
-			'$this->tenthanh',
-			'$this->hoten',
-			'$this->gioitinh',
-			'$this->ngaysinh',
-			'$this->ngaybonmang',
-			'$this->diachi',
-			'$this->sdt',
-			'$this->khugiao',
-			'$this->tenthanhcha',
-			'$this->hotencha',
-			'$this->nghenghiepcha',
-			'$this->dienthoaicha',
-			'$this->tenthanhme',
-			'$this->hotenme',
-			'$this->nghenghiepme',
-			'$this->dienthoaime',
-			'$this->daruatoi',
-			'$this->ngayruatoi',
-			'$this->linhmucruatoi',
-			'$this->nhathoruatoi',
-			'$this->daruocle',
-			'$this->ngayruocle',
-			'$this->linhmucruocle',
-			'$this->nhathoruocle',
-			'$this->dathemsuc',
-			'$this->ngaythemsuc',
-			'$this->linhmucthemsuc',
-			'$this->nhathothemsuc',
-			'$this->tinhtrang',
-			'$this->ngaythem')");
+			'{$mamoi}',
+			'{$value_thieunhi['tenthanh']}',
+			'{$value_thieunhi['hoten']}',
+			'{$value_thieunhi['gioitinh']}',
+			'{$value_thieunhi['ngaysinh']}',
+			'{$value_thieunhi['ngaybonmang']}',
+			'{$value_thieunhi['diachi']}',
+			'{$value_thieunhi['sdt']}',
+			'{$value_thieunhi['khugiao']}',
+			'{$value_thieunhi['tenthanhcha']}',
+			'{$value_thieunhi['hotencha']}',
+			'{$value_thieunhi['nghenghiepcha']}',
+			'{$value_thieunhi['dienthoaicha']}',
+			'{$value_thieunhi['tenthanhme']}',
+			'{$value_thieunhi['hotenme']}',
+			'{$value_thieunhi['nghenghiepme']}',
+			'{$value_thieunhi['dienthoaime']}',
+			'{$value_thieunhi['daruatoi']}',
+			'{$value_thieunhi['ngayruatoi']}',
+			'{$value_thieunhi['linhmucruatoi']}',
+			'{$value_thieunhi['nhathoruatoi']}',
+			'{$value_thieunhi['daruocle']}',
+			'{$value_thieunhi['ngayruocle']}',
+			'{$value_thieunhi['linhmucruocle']}',
+			'{$value_thieunhi['nhathoruocle']}',
+			'{$value_thieunhi['dathemsuc']}',
+			'{$value_thieunhi['ngaythemsuc']}',
+			'{$value_thieunhi['linhmucthemsuc']}',
+			'{$value_thieunhi['nhathothemsuc']}',
+			'{$value_thieunhi['tinhtrang']}',
+			'{$value_thieunhi['ngaythem']}',
+			'{$value_thieunhi['ghichu']}')");
 	}
-	public function sua($id_thieunhi){
+	public function sua($value_thieunhi){
 		$this->db->query("UPDATE thieunhi SET
-			tenthanh       ='$this->tenthanh',
-			hoten          ='$this->hoten',
-			gioitinh       ='$this->gioitinh',
-			ngaysinh       ='$this->ngaysinh',
-			ngaybonmang    ='$this->ngaybonmang',
-			diachi         ='$this->diachi',
-			sdt            ='$this->sdt',
-			khugiao        ='$this->khugiao',
-			tenthanhcha    ='$this->tenthanhcha',
-			hotencha       ='$this->hotencha',
-			nghenghiepcha  ='$this->nghenghiepcha',
-			dienthoaicha   ='$this->dienthoaicha',
-			tenthanhme     ='$this->tenthanhme',
-			hotenme        ='$this->hotenme',
-			nghenghiepme   ='$this->nghenghiepme',
-			dienthoaime    ='$this->dienthoaime',
-			daruatoi       ='$this->daruatoi',
-			ngayruatoi     ='$this->ngayruatoi',
-			linhmucruatoi  ='$this->linhmucruatoi',
-			nhathoruatoi   ='$this->nhathoruatoi',
-			daruocle       ='$this->daruocle',
-			ngayruocle     ='$this->ngayruocle',
-			linhmucruocle  ='$this->linhmucruocle',
-			nhathoruocle   ='$this->nhathoruocle',
-			dathemsuc      ='$this->dathemsuc',
-			ngaythemsuc    ='$this->ngaythemsuc',
-			linhmucthemsuc ='$this->linhmucthemsuc',
-			nhathothemsuc  ='$this->nhathothemsuc'
-			where id_thieunhi='$id_thieunhi'");
+			tenthanh       =   '{$value_thieunhi['tenthanh']}',
+			hoten          =   '{$value_thieunhi['hoten']}',
+			gioitinh       =   '{$value_thieunhi['gioitinh']}',
+			ngaysinh       =   '{$value_thieunhi['ngaysinh']}',
+			ngaybonmang    =   '{$value_thieunhi['ngaybonmang']}',
+			diachi         =   '{$value_thieunhi['diachi']}',
+			sdt            =   '{$value_thieunhi['sdt']}',
+			khugiao        =   '{$value_thieunhi['khugiao']}',
+			tenthanhcha    =   '{$value_thieunhi['tenthanhcha']}',
+			hotencha       =   '{$value_thieunhi['hotencha']}',
+			nghenghiepcha  =   '{$value_thieunhi['nghenghiepcha']}',
+			dienthoaicha   =   '{$value_thieunhi['dienthoaicha']}',
+			tenthanhme     =   '{$value_thieunhi['tenthanhme']}',
+			hotenme        =   '{$value_thieunhi['hotenme']}',
+			nghenghiepme   =   '{$value_thieunhi['nghenghiepme']}',
+			dienthoaime    =   '{$value_thieunhi['dienthoaime']}',
+			daruatoi       =   '{$value_thieunhi['daruatoi']}',
+			ngayruatoi     =   '{$value_thieunhi['ngayruatoi']}',
+			linhmucruatoi  =   '{$value_thieunhi['linhmucruatoi']}',
+			nhathoruatoi   =   '{$value_thieunhi['nhathoruatoi']}',
+			daruocle       =   '{$value_thieunhi['daruocle']}',
+			ngayruocle     =   '{$value_thieunhi['ngayruocle']}',
+			linhmucruocle  =   '{$value_thieunhi['linhmucruocle']}',
+			nhathoruocle   =   '{$value_thieunhi['nhathoruocle']}',
+			dathemsuc      =   '{$value_thieunhi['dathemsuc']}',
+			ngaythemsuc    =   '{$value_thieunhi['ngaythemsuc']}',
+			linhmucthemsuc =   '{$value_thieunhi['linhmucthemsuc']}',
+			nhathothemsuc  =   '{$value_thieunhi['nhathothemsuc']}',
+			ghichu         =   '{$value_thieunhi['ghichu']}'
+			WHERE id_thieunhi  =   '{$value_thieunhi['id_thieunhi']}'");
 	}
 	public function tinhtrang($id,$tinhtrang){
 		$this->db->query("UPDATE thieunhi SET tinhtrang='$tinhtrang' WHERE id_thieunhi='$id'");

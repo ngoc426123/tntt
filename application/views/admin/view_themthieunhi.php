@@ -1,16 +1,15 @@
 <div class="content-wrapper">
     <section class="content-header">
-        <h1>thêm thiếu nhi</h1>
+        <h1>Thêm thiếu nhi</h1>
         <small>Lưu ý: Phần này sử dụng để thêm các em chưa có trong CSDL, anh chị huynh trưởng cân nhắc khi sử dụng để khi thêm không bị trùng thiếu nhi.</small>
     </section>
     <section class="content">
         <?php if(isset($alert)){alert($alert["stt"],$alert["title"],$alert["content"]);} ?>
-        <div class="row">
-            <form class="form-horizontal" method="POST" action="<?php echo base_url("thieunhi/add"); ?>">
-                <div class="col-lg-6 col-xs-12">
-                    <div class="box box-primary">
-                        <div class="box-header with-border"><h3 class="box-title">Thông tin gia đình</h3></div>
-                        <div class="box-body">
+        <form class="form-horizontal" method="POST" action="<?php echo base_url("thieunhi/add"); ?>">
+                <div class="box box-primary">
+                    <div class="box-header with-border"><h3 class="box-title">Thông tin thiếu nhi</h3></div>
+                    <div class="box-body">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                             <h4 class="text-red">Thông tin cá nhân</h4>
                             <div class="form-group">
                                 <label for="tenthanh" class="col-sm-3 control-label">Tên Thánh</label>
@@ -49,6 +48,12 @@
                                 <label for="khugiao" class="col-sm-3 control-label">Khu giáo</label>
                                 <div class="col-sm-9"><input type="number" class="form-control" id="khugiao" name="khugiao" value="0"></div>
                             </div>
+                            <div class="form-group">
+                                <label for="khugiao" class="col-sm-3 control-label">Ghi chú</label>
+                                <div class="col-sm-9"><textarea name="ghichu" id="ghichu" class="form-control"></textarea></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                             <h4 class="text-red">Thông tin cha</h4>
                             <div class="form-group">
                                 <label for="tenthanhcha" class="col-sm-3 control-label">Tên Thánh</label>
@@ -86,10 +91,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-xs-12">
-                    <div class="box box-primary">
-                        <div class="box-header with-border"><h3 class="box-title">Thông tin giáo xứ</h3></div>
-                        <div class="box-body">
+                <div class="box box-primary">
+                    <div class="box-header with-border"><h3 class="box-title">Thông tin giáo xứ</h3></div>
+                    <div class="box-body">
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                             <h4 class="text-red">Rửa tội</h4>
                             <div class="form-group">
                                 <label for="daruatoi" class="col-sm-3 control-label">Xác nhận</label>
@@ -112,6 +117,8 @@
                                 <label for="nhathoruatoi" class="col-sm-3 control-label">Nhà thờ</label>
                                 <div class="col-sm-9"><input type="text" class="form-control" id="nhathoruatoi" name="nhathoruatoi"></div>
                             </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                             <h4 class="text-red">Rước lễ</h4>
                             <div class="form-group">
                                 <label for="daruocle" class="col-sm-3 control-label">Xác nhận</label>
@@ -134,6 +141,8 @@
                                 <label for="nhathoruocle" class="col-sm-3 control-label">Nhà thờ</label>
                                 <div class="col-sm-9"><input type="text" class="form-control" id="nhathoruocle" name="nhathoruocle"></div>
                             </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                             <h4 class="text-red">Thêm sức</h4>
                             <div class="form-group">
                                 <label for="dathemsuc" class="col-sm-3 control-label">Xác nhận</label>
@@ -159,16 +168,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-12 col-xs-12">
-                    <div class="box box-primary">
-                        <div class="box-header with-border"><h3 class="box-title">Khung điều hướng</h3></div>
-                        <div class="box-body text-right">
-                            <input type="submit" class="btn btn-success" value="Đồng ý" name="ok">
-                            <input type="reset" class="btn btn-info" value="Nhập lại">
-                        </div>
+                <div class="box box-primary">
+                    <div class="box-header with-border"><h3 class="box-title">Khung điều hướng</h3></div>
+                    <div class="box-body text-right">
+                        <input type="submit" class="btn btn-success" value="Đồng ý" name="ok">
+                        <input type="reset" class="btn btn-info" value="Nhập lại">
                     </div>
                 </div>
-            </form>
-        </div>
+        </form>
     </section>
 </div>
