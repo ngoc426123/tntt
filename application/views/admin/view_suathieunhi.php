@@ -66,7 +66,17 @@
                             </div>
                             <div class="form-group">
                                 <label for="khugiao" class="col-sm-3 control-label">Khu giáo</label>
-                                <div class="col-sm-9"><input type="number" class="form-control" id="khugiao" name="khugiao" value="<?php echo $result['khugiao']; ?>"></div>
+                                <div class="col-sm-9">
+                                    <select  class="form-control" id="khugiao" name="khugiao">
+                                    <?php
+                                    for ($i=0; $i <= 6; $i++) { 
+                                    ?>
+                                        <option value="<?php echo $i; ?>" <?php echo ($result['khugiao']==$i)?"selected":"" ?>><?php echo $i; ?></option>
+                                    <?php
+                                    }
+                                    ?>
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="khugiao" class="col-sm-3 control-label">Ghi chú</label>

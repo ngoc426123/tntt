@@ -58,9 +58,9 @@
                                         <h3 class="widget-user-username" id="hoten"></h3>
                                         <h5 class="widget-user-desc" id="tenthanh"></h5>
                                     </div>
-                                    <div class="widget-user-image">
+                                    <!-- <div class="widget-user-image">
                                         <img class="img-circle" src="http://newwayjsc.com.vn/themes/web/common/no-avatar.png" alt="User Avatar">
-                                    </div>
+                                    </div> -->
                                     <div class="box-footer">
                                         <div class="row">
                                             <div class="col-sm-4 border-right">

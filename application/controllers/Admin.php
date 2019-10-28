@@ -8,7 +8,6 @@ class Admin extends CI_Controller{
 		$this->load->database();
 	}
 	public function index(){
-		$this->load->model("model_huynhtruong");
 		$this->model_function->checklogin(base_url()."adminlogin");
 		$data["loged_user"]=$_SESSION["thongtinhuynhtruong"];
 		$data["view_page"]="view_dashbroad";

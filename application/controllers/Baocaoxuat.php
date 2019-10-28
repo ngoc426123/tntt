@@ -193,13 +193,14 @@ class Baocaoxuat extends CI_Controller{
 		$this->excel->getActiveSheet()->getDefaultStyle()->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 		$this->excel->getActiveSheet()->getDefaultStyle()->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
 		$this->excel->getActiveSheet()->mergeCells('A1:D3');
-		$this->excel->getActiveSheet()->mergeCells('A4:M5');
+		$this->excel->getActiveSheet()->mergeCells('A4:N5');
 		$this->excel->getActiveSheet()->mergeCells('A6:A7');
 		$this->excel->getActiveSheet()->mergeCells('B6:B7');
 		$this->excel->getActiveSheet()->mergeCells('C6:C7');
-		$this->excel->getActiveSheet()->mergeCells('D6:H6');
-		$this->excel->getActiveSheet()->mergeCells('I6:M6');
-		$this->excel->getActiveSheet()->mergeCells('N6:N7');
+		$this->excel->getActiveSheet()->mergeCells('D6:D7');
+		$this->excel->getActiveSheet()->mergeCells('E6:I6');
+		$this->excel->getActiveSheet()->mergeCells('J6:N6');
+		$this->excel->getActiveSheet()->mergeCells('O6:O7');
 		$this->excel->getActiveSheet()->getCell('A1')->setValue("GIÁO XỨ PHÚ HÒA\nLIÊN ĐOÀN THÁNH THỂ CHÚA GIÊSU");
 		$this->excel->getActiveSheet()->getStyle('A1')->getAlignment()->setWrapText(true);
 		$this->excel->getActiveSheet()->getCell('A4')->setValue("Điểm Số Lớp ".$_POST["lopgiaoly"]);
@@ -223,20 +224,21 @@ class Baocaoxuat extends CI_Controller{
 		/***********TIÊU ĐỀ***********/
 		$this->excel->getActiveSheet()->setCellValue('A6',"Mã thiếu nhi");
 		$this->excel->getActiveSheet()->setCellValue('B6',"Tên Thánh");
-		$this->excel->getActiveSheet()->setCellValue('C6',"Họ tên");
-		$this->excel->getActiveSheet()->setCellValue('D6',"HKI");
-		$this->excel->getActiveSheet()->setCellValue('D7',"Miệng");
-		$this->excel->getActiveSheet()->setCellValue('E7',"15 Phút");
-		$this->excel->getActiveSheet()->setCellValue('F7',"45 Phút");
-		$this->excel->getActiveSheet()->setCellValue('G7',"Thi");
-		$this->excel->getActiveSheet()->setCellValue('H7',"Trung Bình");
-		$this->excel->getActiveSheet()->setCellValue('I6',"KII");
-		$this->excel->getActiveSheet()->setCellValue('I7',"Miệng");
-		$this->excel->getActiveSheet()->setCellValue('J7',"15 Phút");
-		$this->excel->getActiveSheet()->setCellValue('K7',"45 Phút");
-		$this->excel->getActiveSheet()->setCellValue('L7',"Thi");
-		$this->excel->getActiveSheet()->setCellValue('M7',"Trung Bình");
-		$this->excel->getActiveSheet()->setCellValue('N6',"TB Năm");
+		$this->excel->getActiveSheet()->setCellValue('C6',"Họ");
+		$this->excel->getActiveSheet()->setCellValue('D6',"Tên");
+		$this->excel->getActiveSheet()->setCellValue('E6',"HKI");
+		$this->excel->getActiveSheet()->setCellValue('E7',"Miệng");
+		$this->excel->getActiveSheet()->setCellValue('F7',"15 Phút");
+		$this->excel->getActiveSheet()->setCellValue('G7',"45 Phút");
+		$this->excel->getActiveSheet()->setCellValue('H7',"Thi");
+		$this->excel->getActiveSheet()->setCellValue('I7',"Trung Bình");
+		$this->excel->getActiveSheet()->setCellValue('J6',"KII");
+		$this->excel->getActiveSheet()->setCellValue('J7',"Miệng");
+		$this->excel->getActiveSheet()->setCellValue('K7',"15 Phút");
+		$this->excel->getActiveSheet()->setCellValue('L7',"45 Phút");
+		$this->excel->getActiveSheet()->setCellValue('M7',"Thi");
+		$this->excel->getActiveSheet()->setCellValue('N7',"Trung Bình");
+		$this->excel->getActiveSheet()->setCellValue('O6',"TB Năm");
 		/************TRUY VẤN*************/
 		$this->load->model("model_diemso");
 		$array_id_thieunhi=explode("|",$_POST["array_id_thieunhi"]);
@@ -253,6 +255,12 @@ class Baocaoxuat extends CI_Controller{
 			$mathieunhi  = $result["mathieunhi"];
 			$tenthanh    = $result["tenthanh"];
 			$hoten       = $result["hoten"];
+			$names       = $result["hoten"];
+	        $name_shift=explode(" ",$names);
+	        $count_array=count($name_shift)-1;
+	        $ten=$name_shift[$count_array];
+	        array_pop($name_shift);
+	        $ho=implode(" ", $name_shift);
 			/***************ĐIỂM SỐ**************/
 			$dmieng_1  = $result["diemmieng_hk1"];
 			$d15p_1    = $result["diem15p_hk1"];
@@ -268,22 +276,19 @@ class Baocaoxuat extends CI_Controller{
 		/***********GHI GIA TRI VAO O**********/
 			$this->excel->getActiveSheet()->setCellValue('A'.$i,$mathieunhi);
 			$this->excel->getActiveSheet()->setCellValue('B'.$i,$tenthanh);
-			$this->excel->getActiveSheet()->setCellValue('C'.$i,$hoten);
-			$this->excel->getActiveSheet()->setCellValue('D'.$i,$dmieng_1);
-			$this->excel->getActiveSheet()->setCellValue('E'.$i,$d15p_1);
-			$this->excel->getActiveSheet()->setCellValue('F'.$i,$d45p_1);
-			$this->excel->getActiveSheet()->setCellValue('G'.$i,$dthi_1);
-			$this->excel->getActiveSheet()->setCellValue('H'.$i,$tb_1);
-			$this->excel->getActiveSheet()->setCellValue('I'.$i,$dmieng_2);
-			$this->excel->getActiveSheet()->setCellValue('J'.$i,$d15p_2);
-			$this->excel->getActiveSheet()->setCellValue('K'.$i,$d45p_2);
-			$this->excel->getActiveSheet()->setCellValue('L'.$i,$dthi_2);
-			$this->excel->getActiveSheet()->setCellValue('M'.$i,$tb_2);
-			$this->excel->getActiveSheet()->setCellValue('N'.$i,$tbcn);
-			$this->excel->getActiveSheet()->getStyle('J'.$i)->getAlignment()->setWrapText(true);
-			$this->excel->getActiveSheet()->getStyle('K'.$i)->getAlignment()->setWrapText(true);
-			$this->excel->getActiveSheet()->getStyle('L'.$i)->getAlignment()->setWrapText(true);
-			$this->excel->getActiveSheet()->getStyle('M'.$i)->getAlignment()->setWrapText(true);
+			$this->excel->getActiveSheet()->setCellValue('C'.$i,$ho);
+			$this->excel->getActiveSheet()->setCellValue('D'.$i,$ten);
+			$this->excel->getActiveSheet()->setCellValue('E'.$i,$dmieng_1);
+			$this->excel->getActiveSheet()->setCellValue('F'.$i,$d15p_1);
+			$this->excel->getActiveSheet()->setCellValue('G'.$i,$d45p_1);
+			$this->excel->getActiveSheet()->setCellValue('H'.$i,$dthi_1);
+			$this->excel->getActiveSheet()->setCellValue('I'.$i,$tb_1);
+			$this->excel->getActiveSheet()->setCellValue('J'.$i,$dmieng_2);
+			$this->excel->getActiveSheet()->setCellValue('K'.$i,$d15p_2);
+			$this->excel->getActiveSheet()->setCellValue('L'.$i,$d45p_2);
+			$this->excel->getActiveSheet()->setCellValue('M'.$i,$dthi_2);
+			$this->excel->getActiveSheet()->setCellValue('N'.$i,$tb_2);
+			$this->excel->getActiveSheet()->setCellValue('O'.$i,$tbcn);
 			$i++;
 		}
 		/*********XUẤT FILE*********/

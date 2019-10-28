@@ -45,7 +45,7 @@ $sql=$this->db->query("SELECT COUNT(*) FROM lichsu WHERE nguoicapnhat={$id_huynh
 $result=$sql->row_array();
 $sllichsu_you=$result["COUNT(*)"];
 // so luong thieu nhi trong lop hoc
-$sql_lop=$this->db->query("SELECT * FROM lopgiaoly WHERE id_lopgiaoly NOT IN(1,11,12,13) ORDER BY douutien");
+$sql_lop=$this->db->query("SELECT * FROM lopgiaoly WHERE id_lopgiaoly NOT IN(11,12,13) ORDER BY douutien");
 $result_lop=$sql_lop->result_array();
 foreach ($result_lop as $value_lop)
 {
@@ -76,8 +76,7 @@ $slruocle=$result_ruocle["COUNT(*)"];
 $sql_themsuc=$this->db->query("SELECT COUNT(*) FROM thieunhi WHERE dathemsuc='1'");
 $result_themsuc=$sql_themsuc->row_array();
 $slthemsuc=$result_themsuc["COUNT(*)"];
-// HUYNH TRUONG
-$value_ht = $this->model_huynhtruong->get_value($id_huynhtruong);
+
 ?>
 <div class="content-wrapper">
     <section class="content">
@@ -176,150 +175,108 @@ $value_ht = $this->model_huynhtruong->get_value($id_huynhtruong);
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-9 col-ld-9 col-sm-12 col-xs-12">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <div class="box box-info">
-                            <div class="box-header with-border"><h3 class="box-title">Số lượng thiếu nhi trong khu giáo</h3></div>
-                            <div class="box-body">
-                                <div class="chart">
-                                    <canvas id="bieudokhugiao"></canvas>
-                                    <ul class="khugiao hide">
-                                        <?php 
-                                        foreach ($khugiao as $key => $value) {
-                                            ?>
-                                            <li>
-                                                <p>Khu <?php echo $key+1; ?></p>
-                                                <span><?php echo $value ?></span>
-                                            </li>
-                                            <?php
-                                        }
-                                        ?>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Thiếu nhi mới nhất</h3>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <div class="box box-primary">
-                            <div class="box-header with-border">
-                                <h3 class="box-title">Thiếu nhi mới nhất</h3>
-                            </div>
-                            <div class="box-body">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>STT</th>
-                                            <th>Mã TN</th>
-                                            <th>Họ tên</th>
-                                            <th>Ngày sinh</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        $query=$this->db->query("SELECT mathieunhi,tenthanh,hoten,ngaysinh FROM thieunhi ORDER BY id_thieunhi DESC LIMIT 0,5");
-                                        $result=$query->result_array();
-                                        foreach ($result as $key => $value) {
-                                            $stt=$key+1;
-                                            $mtn=$value["mathieunhi"]; 
-                                            $ten=$value["tenthanh"]." ".$value["hoten"];
-                                            ?>
-                                            <tr>
-                                                <td><?php echo $stt; ?></td>
-                                                <td><?php echo $mtn;?></td>
-                                                <td><?php echo $ten; ?></td>
-                                                <td><?php echo $value["ngaysinh"]; ?></td>
-                                            </tr>
-                                            <?php
-                                        }
-                                        ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <div class="box box-danger">
-                            <div class="box-header with-border"><h3 class="box-title">Tổng quan năm học</h3></div>
-                            <div class="box-body">
-                                <div class="chart">
-                                    <canvas id="bieudothieunhi"></canvas>
-                                    <ul class="thieunhi hide">
-                                        <li>
-                                            <p><?php echo $slnam; ?></p>
-                                        </li>
-                                        <li>
-                                            <p><?php echo $slnu; ?></p>
-                                        </li>
-                                        <li>
-                                            <p><?php echo $slruatoi; ?></p>
-                                        </li>
-                                        <li>
-                                            <p><?php echo $slruocle; ?></p>
-                                        </li>
-                                        <li>
-                                            <p><?php echo $slthemsuc; ?></p>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <div class="box box-success">
-                            <div class="box-header with-border"><h3 class="box-title">Số lượng thiếu nhi trong một lớp</h3></div>
-                            <div class="box-body">
-                                <div class="chart">
-                                    <canvas id="bieudolophoc"></canvas>
-                                    <ul class="lophoc hide">
-                                        <?php
-                                        foreach ($soluonglophoc as $value) {
-                                            ?>
-                                            <li>
-                                                <p><?php echo $value[0] ?></p>
-                                                <span><?php echo $value[1] ?></span>
-                                            </li>
-                                            <?php
-                                        }
-                                        ?>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="box-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Mã TN</th>
+                                    <th>Họ tên</th>
+                                    <th>Ngày sinh</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $query=$this->db->query("SELECT mathieunhi,tenthanh,hoten,ngaysinh FROM thieunhi ORDER BY id_thieunhi DESC LIMIT 0,25");
+                                $result=$query->result_array();
+                                foreach ($result as $key => $value) {
+                                    $stt=$key+1;
+                                    $mtn=$value["mathieunhi"]; 
+                                    $ten=$value["tenthanh"]." ".$value["hoten"];
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $stt; ?></td>
+                                        <td><?php echo $mtn;?></td>
+                                        <td><?php echo $ten; ?></td>
+                                        <td><?php echo $value["ngaysinh"]; ?></td>
+                                    </tr>
+                                    <?php
+                                }
+                                ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-ld-3 col-sm-12 col-xs-12">
-                <div class="box box-info">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Thông tin của bạn</h3>
-                    </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="box box-danger">
+                    <div class="box-header with-border"><h3 class="box-title">Tổng quan năm học</h3></div>
                     <div class="box-body">
-                        <p><strong>Mã huynh trưởng</strong> : <?php echo $_SESSION["thongtinhuynhtruong"]["mahuynhtruong"] ?></p>
-                        <p><strong>Họ tên</strong> : <?php echo $_SESSION["thongtinhuynhtruong"]["tenhuynhtruong"] ?></p>
-                        <p><strong>Địa chỉ</strong> : <?php echo $value_ht["diachi"] ?></p>
-                        <p><strong>Email</strong> : <?php echo $value_ht["email"] ?></p>
-                        <p><strong>Số điện thoại</strong> : <?php echo $value_ht["sdt"] ?></p>
-                        <p><strong>Thành viên</strong> : <?php echo $_SESSION["thongtinhuynhtruong"]["loaithanhvien_gra"] ?></p>
-                        <p><strong>Tình trạng</strong> : <?php echo $_SESSION["thongtinhuynhtruong"]["tinhtrang_gra"] ?></p>
-                        <p><strong>Lớp giáo lý</strong> : <?php echo $_SESSION["thongtinhuynhtruong"]["tenlopgiaoly"] ?></p>
+                        <div class="chart">
+                            <canvas id="bieudothieunhi"></canvas>
+                            <ul class="thieunhi hide">
+                                <li>
+                                    <p><?php echo $slnam; ?></p>
+                                </li>
+                                <li>
+                                    <p><?php echo $slnu; ?></p>
+                                </li>
+                                <li>
+                                    <p><?php echo $slruatoi; ?></p>
+                                </li>
+                                <li>
+                                    <p><?php echo $slruocle; ?></p>
+                                </li>
+                                <li>
+                                    <p><?php echo $slthemsuc; ?></p>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <div class="info-box">
-                    <span class="info-box-icon bg-aqua"><i class="fa fa-info"></i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">Bạn đăng nhập lúc</span>
-                        <span class="info-box-number"><?php echo $_SESSION["thongtinhuynhtruong"]["time"] ?></span>
-                        <span class="info-box-number"><?php echo $_SESSION["thongtinhuynhtruong"]["day"] ?></span>
+                <div class="box box-success">
+                    <div class="box-header with-border"><h3 class="box-title">Số lượng thiếu nhi trong lớp</h3></div>
+                    <div class="box-body">
+                        <div class="chart">
+                            <canvas id="bieudolophoc"></canvas>
+                            <ul class="lophoc hide">
+                                <?php
+                                foreach ($soluonglophoc as $value) {
+                                    ?>
+                                    <li>
+                                        <p><?php echo $value[0] ?></p>
+                                        <span><?php echo $value[1] ?></span>
+                                    </li>
+                                    <?php
+                                }
+                                ?>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <div class="info-box">
-                    <span class="info-box-icon bg-aqua"><i class="fa fa-info"></i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">Địa chỉ IP của bạn</span>
-                        <span class="info-box-number"><?php echo $_SESSION["thongtinhuynhtruong"]["ip"]; ?></span>
+                <div class="box box-info">
+                    <div class="box-header with-border"><h3 class="box-title">Số lượng thiếu nhi trong khu giáo</h3></div>
+                    <div class="box-body">
+                        <div class="chart">
+                            <canvas id="bieudokhugiao"></canvas>
+                            <ul class="khugiao hide">
+                                <?php 
+                                foreach ($khugiao as $key => $value) {
+                                    ?>
+                                    <li>
+                                        <p>Khu <?php echo $key+1; ?></p>
+                                        <span><?php echo $value ?></span>
+                                    </li>
+                                    <?php
+                                }
+                                ?>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>

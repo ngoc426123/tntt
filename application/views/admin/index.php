@@ -29,6 +29,9 @@
                 </a>
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="modal" data-target="#modal-info-huynhtruong"><i class="fa fa-info"></i></a>
+                        </li>
                         <li class="dropdown notifications-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-history"></i></a>
                             <ul class="dropdown-menu">
@@ -89,9 +92,9 @@
                                     <p><?php echo $_SESSION["thongtinhuynhtruong"]["tenhuynhtruong"] ?>
                                     <?php 
                                     if($_SESSION["thongtinhuynhtruong"]["loaithanhvien"]==0){
-                                        ?>
+                                    ?>
                                         <small>Đang đứng lớp <?php echo $_SESSION["thongtinhuynhtruong"]["tenlopgiaoly"] ?></small>
-                                        <?php
+                                    <?php
                                     }
                                     ?>
                                     </p>
@@ -110,6 +113,63 @@
                 </div>
             </nav>
         </header>
+        <div class="modal fade" id="modal-info-huynhtruong">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        <h4 class="modal-title">Thông tin của bạn</h4>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-condensed">
+                            <tr>
+                                <th>Mã huynh trưởng</th>
+                                <td><?php echo $_SESSION["thongtinhuynhtruong"]["mahuynhtruong"] ?></td>
+                            </tr>
+                            <tr>
+                                <th>Họ tên</th>
+                                <td><?php echo $_SESSION["thongtinhuynhtruong"]["tenhuynhtruong"] ?></td>
+                            </tr>
+                            <tr>
+                                <th>Địa chỉ</th>
+                                <td><?php echo $_SESSION["thongtinhuynhtruong"]["diachi"] ?></td>
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                                <td><?php echo $_SESSION["thongtinhuynhtruong"]["email"] ?></td>
+                            </tr>
+                            <tr>
+                                <th>Số điện thoại</th>
+                                <td><?php echo $_SESSION["thongtinhuynhtruong"]["sdt"] ?></td>
+                            </tr>
+                            <tr>
+                                <th>Thành viên</th>
+                                <td><?php echo $_SESSION["thongtinhuynhtruong"]["loaithanhvien_gra"] ?></td>
+                            </tr>
+                            <tr>
+                                <th>Tình trạng</th>
+                                <td><?php echo $_SESSION["thongtinhuynhtruong"]["tinhtrang_gra"] ?></td>
+                            </tr>
+                            <tr>
+                                <th>Lớp giáo lý</th>
+                                <td><?php echo $_SESSION["thongtinhuynhtruong"]["tenlopgiaoly"] ?></td>
+                            </tr>
+                            <tr>
+                                <th>Bạn đăng nhập lúc</th>
+                                <td>
+                                    <p><?php echo $_SESSION["thongtinhuynhtruong"]["time"] ?></p>
+                                    <p><?php echo $_SESSION["thongtinhuynhtruong"]["day"] ?></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Địa chỉ IP của bạn</th>
+                                <td><?php echo $_SESSION["thongtinhuynhtruong"]["ip"]; ?></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
         <aside class="main-sidebar">
             <section class="sidebar">
                 <div class="user-panel">
