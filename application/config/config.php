@@ -17,7 +17,7 @@ date_default_timezone_set('GMT');
 | environments.
 |
 */
-$config['base_url'] = 'http://localhost/tntt';
+$config['base_url'] = 'http://localhost/tntt/';
 
 /*
 |--------------------------------------------------------------------------

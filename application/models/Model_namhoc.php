@@ -13,10 +13,7 @@ class Model_namhoc extends CI_Model{
 	public function get_value($id_namhoc){
 		$query=$this->db->query("SELECT * FROM namhoc WHERE id_namhoc='$id_namhoc'");
 		$result=$query->row_array();
-		$value_namhoc["id_namhoc"] = $result["id_namhoc"];
-		$value_namhoc["tennamhoc"] = $result["tennamhoc"];
-		$value_namhoc["chude"]     = $result["chude"];
-		return $value_namhoc;
+		return $result;
 	}
 	public function get_list(){
 		$query=$this->db->query("SELECT * FROM namhoc ORDER BY tennamhoc");

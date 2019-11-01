@@ -25,7 +25,7 @@ $sql=$this->db->query("SELECT COUNT(*) FROM huynhtruong");
 $result=$sql->row_array();
 $tongsohuynhtruong=$result["COUNT(*)"];
 // tong so huynh truong dang hoat dong
-$sql=$this->db->query("SELECT COUNT(*) FROM huynhtruong WHERE tinhtrang=1");
+$sql=$this->db->query("SELECT COUNT(*) FROM huynhtruong WHERE tinhtrang=1 AND id_huynhtruong NOT IN(16)");
 $result=$sql->row_array();
 $tongsohuynhtruong_ol=$result["COUNT(*)"];
 // so luong lop hoc
@@ -45,7 +45,7 @@ $sql=$this->db->query("SELECT COUNT(*) FROM lichsu WHERE nguoicapnhat={$id_huynh
 $result=$sql->row_array();
 $sllichsu_you=$result["COUNT(*)"];
 // so luong thieu nhi trong lop hoc
-$sql_lop=$this->db->query("SELECT * FROM lopgiaoly WHERE id_lopgiaoly NOT IN(11,12,13) ORDER BY douutien");
+$sql_lop=$this->db->query("SELECT * FROM lopgiaoly WHERE id_lopgiaoly NOT IN(0,11,12,13) ORDER BY douutien");
 $result_lop=$sql_lop->result_array();
 foreach ($result_lop as $value_lop)
 {

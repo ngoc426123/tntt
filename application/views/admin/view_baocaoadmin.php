@@ -29,21 +29,16 @@
                         <div class="row">
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                 <div class="checkbox"><label for="c1"><input type="checkbox" value="1" name="z_khugiao[]" id="c1">Khu 1</label></div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                 <div class="checkbox"><label for="c2"><input type="checkbox" value="2" name="z_khugiao[]" id="c2">Khu 2</label></div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                 <div class="checkbox"><label for="c3"><input type="checkbox" value="3" name="z_khugiao[]" id="c3">Khu 3</label></div>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                 <div class="checkbox"><label for="c4"><input type="checkbox" value="4" name="z_khugiao[]" id="c4">Khu 4</label></div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                 <div class="checkbox"><label for="c5"><input type="checkbox" value="5" name="z_khugiao[]" id="c5">Khu 5</label></div>
+                                <div class="checkbox"><label for="c6"><input type="checkbox" value="6" name="z_khugiao[]" id="c6">Khu 6</label></div>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                <div class="checkbox"><label for="c6"><input type="checkbox" value="6" name="z_khugiao[]" id="c6">Khu 6</label></div>
+                                <div class="checkbox"><label for="c0"><input type="checkbox" value="0" name="z_khugiao[]" id="c0">Ngoài xứ</label></div>
                             </div>
                         </div>
                     </div>
@@ -72,7 +67,7 @@
                         </div>
                         <div class="form-group">
                             <select class="form-control" id="zlopgiaoly" name="zid_lopgiaoly">
-                                <option value="0">--Chọn lớp học</option>
+                                <option value="-1">--Chọn lớp học</option>
                                 <?php 
                                 $sql_lgl=$this->db->query("SELECT * FROM lopgiaoly ORDER BY douutien");
                                 $result_lgl=$sql_lgl->result_array();
@@ -97,10 +92,13 @@
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                         <label class="control-label">Chọn sắp xếp</label>
-                        <div class="radio"><label for="s1"><input checked id="s1" type="radio" name="z_sosanh" value="1">Sắp xếp theo ID</label></div>
-                        <div class="radio"><label for="s2"><input id="s2" type="radio" name="z_sosanh" value="2">Sắp xếp theo mã thiếu nhi</label></div>
-                        <div class="radio"><label for="s3"><input id="s3" type="radio" name="z_sosanh" value="3">Sắp xếp theo tên</label></div>
-                        <div class="radio"><label for="s4"><input id="s4" type="radio" name="z_sosanh" value="4">Sắp xếp theo năm sinh</label></div>
+                        <div class="radio"><label for="s1"><input checked id="s1" type="radio" name="z_sapxep" value="1">Sắp xếp theo ID</label></div>
+                        <div class="radio"><label for="s2"><input id="s2" type="radio" name="z_sapxep" value="2">Sắp xếp theo mã thiếu nhi</label></div>
+                        <div class="radio"><label for="s3"><input id="s3" type="radio" name="z_sapxep" value="3">Sắp xếp theo tên</label></div>
+                        <div class="radio"><label for="s4"><input id="s4" type="radio" name="z_sapxep" value="4">Sắp xếp theo năm sinh</label></div>
+                        <label class="control-label">Chọn thứ tự</label>
+                        <div class="radio"><label for="s5"><input checked id="s5" type="radio" name="z_thutu" value="1">Nhỏ đến lớp</label></div>
+                        <div class="radio"><label for="s6"><input id="s6" type="radio" name="z_thutu" value="2">Lớn đến nhỏ</label></div>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                         <p><strong>Lưu ý : </strong></p>
@@ -122,20 +120,29 @@
                     <div class="box-header with-border"><h3 class="box-title">Danh sách lớp học</h3></div>
                     <div class="box-body table-responsive">
                         <?php
+                        if(isset($text_query[0])){
+                            echo "<p>Bạn đang lọc</p>";
+                            foreach ($text_query as $key => $value) {
+                                echo "<span class='badge'>{$value}</span> ";
+                            }
+                        }
+                        ?>
+                        <?php
                         if(isset($result_tn)){
-                            ?>
+                        ?>
                             <input type="hidden" id="id_lopgiaoly" value="<?php echo $id_lopgiaoly ?>">
                             <input type="hidden" id="lopgiaoly" value="<?php echo $lopgiaoly ?>">
                             <input type="hidden" id="id_namhoc" value="<?php echo $id_namhoc ?>">
                             <input type="hidden" id="namhoc" value="<?php echo $namhoc ?>">
                             <input type="hidden" id="tenhuynhtruong" value="<?php echo $tenhuynhtruong ?>">
-                            <?php
+                        <?php
                         } 
                         ?>
                         <table class="table table-striped" id="table_thieunhi">
                             <thead>
                                 <tr>
                                     <th><input type="checkbox" class="checkall"></th>
+                                    <th>Stt</th>
                                     <th>Mã</th>
                                     <th>Tên thánh + họ</th>
                                     <th>Tên</th>
@@ -148,6 +155,7 @@
                                 <tbody>
                                     <?php
                                     foreach ($result_tn as $key_tn => $value_tn) {
+                                        $stt = $key_tn + 1;
                                         $id_thieunhi=$value_tn["id_thieunhi"];
                                         $names=$value_tn["hoten"];
                                         $name_shift=explode(" ",$names);
@@ -158,6 +166,7 @@
                                         ?>
                                         <tr>
                                             <td><input type="checkbox" class="checktn" value="<?php echo $id_thieunhi ?>"></td>
+                                            <td><?php echo $stt ?></td>
                                             <td><?php echo $value_tn['mathieunhi'] ?></td>
                                             <td><?php echo $value_tn['tenthanh']." ".$ho; ?></td>
                                             <td><?php echo $name; ?></td>

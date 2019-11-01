@@ -1,5 +1,5 @@
 <div class="content-wrapper">
-    <section class="content-header"><h1>danh sách huynh trưởng</h1></section>
+    <section class="content-header"><h1>Danh sách huynh trưởng</h1></section>
     <section class="content">
         <?php if(isset($alert)){alert($alert["stt"],$alert["title"],$alert["content"]);} ?>
         <div class="row">
