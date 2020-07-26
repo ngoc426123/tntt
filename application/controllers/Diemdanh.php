@@ -5,7 +5,7 @@ class Diemdanh extends CI_Controller{
 		session_start();
 		$this->load->helper("url");
 		$this->load->database();
-		$this->load->model("model_function");
+		$this->load->model(array("model_function","model_diemdanh"));
 		$this->model_function->checklogin(base_url()."adminlogin");
 	}
 	public function index(){
@@ -56,19 +56,13 @@ class Diemdanh extends CI_Controller{
 		$query=explode("|", $_POST["query"]);
 		$id_phanlop=$query[0];
 		$ngaythang=$query[1];
-		echo $id_phanlop.$ngaythang;
-		$this->db->query("INSERT INTO chuyencan VALUES(
-			NULL,
-			'$id_phanlop',
-			'$ngaythang',
-			'1',
-			'')");
+		$this->model_diemdanh->add($id_phanlop,$ngaythang);
 	}
 	public function del(){
 		$query=explode("|", $_POST["query"]);
 		$id_phanlop=$query[0];
 		$ngaythang=$query[1];
-		$this->db->query("DELETE FROM chuyencan WHERE id_phanlop='$id_phanlop' AND ngaynghi='$ngaythang'");
+		$this->model_diemdanh->del($id_phanlop,$ngaythang);
 	}
 }
 ?>

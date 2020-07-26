@@ -198,6 +198,9 @@
                         <li><a href="<?php echo base_url("baocao"); ?>">
                             <i class="fa fa-files-o"> </i><span>Báo cáo</span>
                         </a></li>
+                        <!-- <li><a href="<?php echo base_url("taokiemtra"); ?>">
+                            <i class="fa fa-file-text"> </i><span>Tạo bài kiểm tra</span>
+                        </a></li> -->
                     <?php
                     }
                     if($_SESSION["thongtinhuynhtruong"]["loaithanhvien"]==1){

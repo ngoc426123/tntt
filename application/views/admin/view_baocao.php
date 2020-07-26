@@ -55,9 +55,71 @@
                     </div>
                 </div>
                 <div class="box box-primary">
-                    <div class="box-header with-border"><h3 class="box-title">In danh sách điểm</h3></div>
+                    <div class="box-header with-border"><h3 class="box-title">In bảng điểm</h3></div>
                     <div class="box-body">
                         <button type="button" class="btn btn-danger btn-indiemso">Lưu</button>
+                    </div>
+                </div>
+                <div class="box box-primary">
+                    <div class="box-header with-border"><h3 class="box-title">In bảng điểm danh</h3></div>
+                    <div class="box-body">
+                        <?php
+                        $mon_now=date('m');
+                        $year_now=date('Y');
+                        ?>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label for="">Từ</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">Chọn tháng</div>
+                                        <select class="form-control thang_from" name="thang_from">
+                                            <?php
+                                            for ($i=1; $i <= 12; $i++) {
+                                            ?>
+                                                <option value="<?php echo $i; ?>" <?php echo ($i==$mon_now)?"selected":"" ?>><?php echo $i ?></option>
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">Chọn Năm</div>
+                                        <select class="form-control nam_from" name="nam_from">
+                                            <option value="<?php echo $year_now - 1; ?>"><?php echo $year_now - 1; ?></option>
+                                            <option value="<?php echo $year_now; ?>" selected><?php echo $year_now; ?></option>
+                                            <option value="<?php echo $year_now + 1; ?>"><?php echo $year_now + 1; ?></option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label for="">Đến</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">Chọn tháng</div>
+                                        <select class="form-control thang_to" name="thang_to">
+                                            <?php
+                                            for ($i=1; $i <= 12; $i++) {
+                                            ?>
+                                                <option value="<?php echo $i; ?>" <?php echo ($i==$mon_now)?"selected":"" ?>><?php echo $i ?></option>
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">Chọn Năm</div>
+                                        <select class="form-control nam_to" name="nam_to">
+                                            <option value="<?php echo $year_now - 1; ?>"><?php echo $year_now - 1; ?></option>
+                                            <option value="<?php echo $year_now; ?>" selected><?php echo $year_now; ?></option>
+                                            <option value="<?php echo $year_now + 1; ?>"><?php echo $year_now + 1; ?></option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-danger btn-indiemdanh">Lưu</button>
                     </div>
                 </div>
                 <div class="box box-primary">

@@ -4,6 +4,7 @@ class Model_checklogin extends CI_Model{
 		parent::__construct();
 		$this->load->database();
 	}
+
 	public function loginadmin($username,$password){
 		$password=md5($password);
 		$sql=$this->db->query("SELECT * FROM user WHERE username='$username' AND password='$password'");

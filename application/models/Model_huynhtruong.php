@@ -11,10 +11,12 @@ class Model_huynhtruong extends CI_Model{
 	private $caphuynhtruong;	
 	private $chucvu;
 	private $tinhtrang=1;
+
 	public function __construct(){
 		parent::__construct();
 		$this->load->database();
 	}
+
 	public function set_value($value_huynhtruong){
 		$this->tenthanh       =	$value_huynhtruong["tenthanh"];
 		$this->hoten          =	trim($value_huynhtruong["hoten"]);

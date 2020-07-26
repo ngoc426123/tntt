@@ -114,17 +114,10 @@
                                             foreach ($sunday as $key => $value){
                                                 if($value<10){$value="0".$value;}
                                                 $ngaythang=$nam."-".$thang."-".$value;
-                                                $query_chk=$this->db->query("SELECT * FROM chuyencan WHERE id_phanlop='$id_phanlop' AND ngaynghi='$ngaythang'");
-                                                if($query_chk->num_rows()>0){
-                                                    ?>
-                                                    <td><input class="checkdiemdanh" type="checkbox" value="<?php echo $id_phanlop."|".$ngaythang ?>" checked></td>
-                                                    <?php
-                                                }
-                                                else{
-                                                    ?>
-                                                    <td><input class="checkdiemdanh" type="checkbox" value="<?php echo $id_phanlop."|".$ngaythang ?>" ></td>
-                                                    <?php
-                                                }
+                                                $query_chk=$this->model_diemdanh->get($id_phanlop,$ngaythang);
+                                                ?>
+                                                <td><input class="checkdiemdanh" type="checkbox" value="<?php echo $id_phanlop."|".$ngaythang ?>" <?php echo ($query_chk==true)?"checked":"" ?>></td>
+                                                <?php
                                             }
                                             ?>
                                         </tr>

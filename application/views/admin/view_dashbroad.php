@@ -11,7 +11,7 @@ $sql=$this->db->query("SELECT COUNT(hoten) FROM thieunhi WHERE tinhtrang=1");
 $result=$sql->row_array();
 $tongsothieunhi=$result["COUNT(hoten)"];
 // tong so thieu nhi dang hoc
-$sql=$this->db->query("SELECT COUNT(thieunhi.id_thieunhi) FROM thieunhi JOIN phanlop ON thieunhi.id_thieunhi=phanlop.id_thieunhi WHERE phanlop.id_namhoc={$id_namhoc} ORDER BY SUBSTRING(hoten,-LOCATE(' ',REVERSE(thieunhi.hoten)))");
+$sql=$this->db->query("SELECT COUNT(thieunhi.id_thieunhi) FROM thieunhi JOIN phanlop ON thieunhi.id_thieunhi=phanlop.id_thieunhi WHERE phanlop.id_namhoc={$id_namhoc} AND phanlop.id_lopgiaoly != 0 ORDER BY SUBSTRING(hoten,-LOCATE(' ',REVERSE(thieunhi.hoten)))");
 $result=$sql->row_array();
 $tongsothieunhi_ol=$result["COUNT(thieunhi.id_thieunhi)"];
 // khu giao

@@ -10,6 +10,7 @@ class Model_lichsu extends CI_Model{
 		parent::__construct();
 		$this->load->database();
 	}
+
 	public function set_value($value_lichsu){
 		date_default_timezone_set('Asia/Ho_Chi_Minh');
 		$now=getdate();

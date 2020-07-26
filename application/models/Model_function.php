@@ -1,8 +1,5 @@
 <?php
 class Model_function extends CI_Model{
-	public function __construct(){
-		parent::__construct();
-	}
 	public function checklogin($path){
 		if (!isset($_SESSION['thongtinhuynhtruong'])){
 			 redirect($path);

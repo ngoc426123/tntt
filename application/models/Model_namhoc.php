@@ -2,10 +2,12 @@
 class Model_namhoc extends CI_Model{
 	private $tennamhoc;
 	private $chude;
+	
 	public function __construct(){
 		parent::__construct();
 		$this->load->database();
 	}
+
 	public function set_value($value_namhoc){
 		$this->tennamhoc		=	$value_namhoc["tennamhoc"];
 		$this->chude			=	$value_namhoc["chude"];

@@ -77,12 +77,13 @@
                                     <?php
                                 }
                                 ?>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="box-footer text-right">
-                        <button type="submit" class="btn btn-success">Cập nhật</button>
-                        <button type="reset" class="btn btn-info">Reset</button>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="box-footer text-right">
+                            <button type="submit" class="btn btn-success">Cập nhật</button>
+                            <button type="reset" class="btn btn-info">Reset</button>
+                        </div>
                     </div>
                 </div>
             </div>

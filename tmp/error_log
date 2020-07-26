@@ -1,0 +1,20 @@
+[23-Aug-2019 21:05:58 Asia/Ho_Chi_Minh] PHP Warning:  include(module/header.php): failed to open stream: No such file or directory in /home/tnttgxph/public_html/tmp/index.php on line 2
+[23-Aug-2019 21:05:58 Asia/Ho_Chi_Minh] PHP Warning:  include(): Failed opening 'module/header.php' for inclusion (include_path='.:/opt/alt/php71/usr/share/pear') in /home/tnttgxph/public_html/tmp/index.php on line 2
+[23-Aug-2019 21:05:58 Asia/Ho_Chi_Minh] PHP Warning:  include(module/footer.php): failed to open stream: No such file or directory in /home/tnttgxph/public_html/tmp/index.php on line 86
+[23-Aug-2019 21:05:58 Asia/Ho_Chi_Minh] PHP Warning:  include(): Failed opening 'module/footer.php' for inclusion (include_path='.:/opt/alt/php71/usr/share/pear') in /home/tnttgxph/public_html/tmp/index.php on line 86
+[26-Aug-2019 07:18:01 Asia/Ho_Chi_Minh] PHP Warning:  include(module/header.php): failed to open stream: No such file or directory in /home/tnttgxph/public_html/tmp/index.php on line 2
+[26-Aug-2019 07:18:01 Asia/Ho_Chi_Minh] PHP Warning:  include(): Failed opening 'module/header.php' for inclusion (include_path='.:/opt/alt/php71/usr/share/pear') in /home/tnttgxph/public_html/tmp/index.php on line 2
+[26-Aug-2019 07:18:01 Asia/Ho_Chi_Minh] PHP Warning:  include(module/footer.php): failed to open stream: No such file or directory in /home/tnttgxph/public_html/tmp/index.php on line 86
+[26-Aug-2019 07:18:01 Asia/Ho_Chi_Minh] PHP Warning:  include(): Failed opening 'module/footer.php' for inclusion (include_path='.:/opt/alt/php71/usr/share/pear') in /home/tnttgxph/public_html/tmp/index.php on line 86
+[04-Oct-2019 11:34:08 Asia/Ho_Chi_Minh] PHP Warning:  include(module/header.php): failed to open stream: No such file or directory in /home/tnttgxph/public_html/tmp/index.php on line 2
+[04-Oct-2019 11:34:08 Asia/Ho_Chi_Minh] PHP Warning:  include(): Failed opening 'module/header.php' for inclusion (include_path='.:/opt/alt/php71/usr/share/pear') in /home/tnttgxph/public_html/tmp/index.php on line 2
+[04-Oct-2019 11:34:08 Asia/Ho_Chi_Minh] PHP Warning:  include(module/footer.php): failed to open stream: No such file or directory in /home/tnttgxph/public_html/tmp/index.php on line 86
+[04-Oct-2019 11:34:08 Asia/Ho_Chi_Minh] PHP Warning:  include(): Failed opening 'module/footer.php' for inclusion (include_path='.:/opt/alt/php71/usr/share/pear') in /home/tnttgxph/public_html/tmp/index.php on line 86
+[13-Nov-2019 05:59:38 Asia/Ho_Chi_Minh] PHP Warning:  include(module/header.php): failed to open stream: No such file or directory in /home/tnttgxph/public_html/tmp/index.php on line 2
+[13-Nov-2019 05:59:38 Asia/Ho_Chi_Minh] PHP Warning:  include(): Failed opening 'module/header.php' for inclusion (include_path='.:/opt/alt/php71/usr/share/pear') in /home/tnttgxph/public_html/tmp/index.php on line 2
+[13-Nov-2019 05:59:38 Asia/Ho_Chi_Minh] PHP Warning:  include(module/footer.php): failed to open stream: No such file or directory in /home/tnttgxph/public_html/tmp/index.php on line 86
+[13-Nov-2019 05:59:38 Asia/Ho_Chi_Minh] PHP Warning:  include(): Failed opening 'module/footer.php' for inclusion (include_path='.:/opt/alt/php71/usr/share/pear') in /home/tnttgxph/public_html/tmp/index.php on line 86
+[20-Nov-2019 22:48:20 Asia/Ho_Chi_Minh] PHP Warning:  include(module/header.php): failed to open stream: No such file or directory in /home/tnttgxph/public_html/tmp/index.php on line 2
+[20-Nov-2019 22:48:20 Asia/Ho_Chi_Minh] PHP Warning:  include(): Failed opening 'module/header.php' for inclusion (include_path='.:/opt/alt/php71/usr/share/pear') in /home/tnttgxph/public_html/tmp/index.php on line 2
+[20-Nov-2019 22:48:20 Asia/Ho_Chi_Minh] PHP Warning:  include(module/footer.php): failed to open stream: No such file or directory in /home/tnttgxph/public_html/tmp/index.php on line 86
+[20-Nov-2019 22:48:20 Asia/Ho_Chi_Minh] PHP Warning:  include(): Failed opening 'module/footer.php' for inclusion (include_path='.:/opt/alt/php71/usr/share/pear') in /home/tnttgxph/public_html/tmp/index.php on line 86

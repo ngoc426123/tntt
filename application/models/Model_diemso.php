@@ -12,10 +12,12 @@ class Model_diemso extends CI_Model{
 	private $dthi_2;
 	private $dtrungbinh_2;
 	private $dtrungbinh_canam;
+	
 	public function __construct(){
 		parent::__construct();
 		$this->load->database();
 	}
+
 	public function set_value($value_diemso){
 		$this->id_phanlop =$value_diemso['id_phanlop'];
 		$this->dmieng_1   =$value_diemso['dmieng_1'];

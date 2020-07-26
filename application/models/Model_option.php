@@ -1,9 +1,10 @@
 <?php
 class Model_option extends CI_Model{
-	public function __construct(){
+    public function __construct(){
 		parent::__construct();
-        $this->load->database();
+		$this->load->database();
 	}
+
     public function get_heso(){
         $sql = $this->db->query("SELECT * FROM cauhinh WHERE tencauhinh LIKE 'heso%'");
         $res = $sql->result_array();

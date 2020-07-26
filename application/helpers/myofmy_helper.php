@@ -31,4 +31,19 @@ if(!function_exists("pr")){
 		echo "</pre>";
 	}
 }
+if(!function_exists("get_sunday")){
+	function get_sunday($month,$year){
+		$sunday = array();
+		$days_in_month = date('t',mktime(0,0,0,$month,1,$year));
+        for($i=1;$i<=$days_in_month;$i++){
+          	if(date('N',mktime(0,0,0,$month,$i,$year))==7){
+          		if(strlen($i)==1){
+          			$i="0".$i;
+          		}
+            	$sunday[]=$i;
+          	}
+        }
+        return $sunday;
+	}
+}
 ?>

@@ -273,7 +273,7 @@ class Baocaoxuat extends CI_Controller{
 			$dthi_2    = $result["diemthi_hk2"];
 			$tb_2      = $result["trungbinh_hk2"];
 			$tbcn      = $result["trungbinh_canam"];
-		/***********GHI GIA TRI VAO O**********/
+			/***********GHI GIA TRI VAO O**********/
 			$this->excel->getActiveSheet()->setCellValue('A'.$i,$mathieunhi);
 			$this->excel->getActiveSheet()->setCellValue('B'.$i,$tenthanh);
 			$this->excel->getActiveSheet()->setCellValue('C'.$i,$ho);
@@ -293,6 +293,146 @@ class Baocaoxuat extends CI_Controller{
 		}
 		/*********XUẤT FILE*********/
 		$filename="diemso_".$_SESSION["thongtinhuynhtruong"]["mahuynhtruong"].".xls";
+		$export = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
+		$export->save("./download/".$filename);
+		$fileurl=base_url()."download/".$filename;
+		echo $fileurl;
+	}
+	public function diemdanh(){
+		$this->load->library('excel');
+		$this->excel->setActiveSheetIndex(0);
+		/***********SESSION***********/
+		$id_namhoc    = $_POST["id_namhoc"];
+		$id_lopgiaoly = $_POST["id_lopgiaoly"];
+		$thang_from   = $_POST["thang_from"];
+		$nam_from     = $_POST["nam_from"];
+		$thang_to     = $_POST["thang_to"];
+		$nam_to       = $_POST["nam_to"];
+		$num_left = $nam_to - $nam_from;
+		$arr = array();
+		for($i=$thang_from; $i <= 12  ; $i++) { 
+			$arr[$nam_from][] = $i;
+		}
+		if( $num_left ){
+			if( $num_left>1 ){
+				for ($j=($nam_from+1); $j < $nam_to ; $j++) { 
+					for ($i=0; $i <= 12 ; $i++) { 
+						$arr[$j][] = $i;
+					}
+				}
+			}
+			for($i=1; $i <= $thang_to  ; $i++) {
+				$arr[$nam_to][] = $i;
+			}
+		}
+
+		foreach ($arr as $year => $row_month) {
+			foreach ($row_month as $month) {
+				$arr_sunday[$year][$month] = get_sunday($month,$year);
+			}
+		}
+		// print_r($arr_sunday); die();
+		/*************BỐ CỤC**************/
+		$this->excel->getActiveSheet()->getDefaultStyle()->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+		$this->excel->getActiveSheet()->getDefaultStyle()->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+		$this->excel->getActiveSheet()->mergeCells('A1:D3');
+		$this->excel->getActiveSheet()->mergeCells('A4:D5');
+		$this->excel->getActiveSheet()->mergeCells('A6:A7');
+		$this->excel->getActiveSheet()->mergeCells('B6:B7');
+		$this->excel->getActiveSheet()->mergeCells('C6:C7');
+		$this->excel->getActiveSheet()->mergeCells('D6:D7');
+		$this->excel->getActiveSheet()->getCell('A1')->setValue("GIÁO XỨ PHÚ HÒA\nLIÊN ĐOÀN THÁNH THỂ CHÚA GIÊSU");
+		$this->excel->getActiveSheet()->getStyle('A1')->getAlignment()->setWrapText(true);
+		$this->excel->getActiveSheet()->getCell('A4')->setValue("Điểm Danh Lớp ".$_POST["lopgiaoly"]);
+		$this->excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
+		$this->excel->getActiveSheet()->getStyle('A4')->getFont()->setBold(true);
+		$this->excel->getActiveSheet()->getStyle('A4')->getFont()->setSize('20');
+		$this->excel->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
+		$this->excel->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
+		$this->excel->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
+		$this->excel->getActiveSheet()->getColumnDimension('D')->setWidth(10);
+		/***********TIÊU ĐỀ***********/
+		$this->excel->getActiveSheet()->setCellValue('A6',"Mã thiếu nhi");
+		$this->excel->getActiveSheet()->setCellValue('B6',"Tên Thánh");
+		$this->excel->getActiveSheet()->setCellValue('C6',"Họ");
+		$this->excel->getActiveSheet()->setCellValue('D6',"Tên");
+		/************NGÀY THÁNG***********/
+		// THÁNG
+		$start_i = 4;
+		foreach ($arr_sunday as $year => $row_month) {
+			foreach ($row_month as $month => $row_day) {
+				$s = $start_i;
+				$e = $start_i + (count($row_day) - 1);
+				$start_i = $e + 1;
+				$start = PHPExcel_Cell::stringFromColumnIndex($s);
+				$end   = PHPExcel_Cell::stringFromColumnIndex($e);
+				$mer = $start."6:".$end."6";
+				$this->excel->getActiveSheet()->mergeCells($mer);
+				$this->excel->getActiveSheet()->getCell($start."6")->setValue("{$month}/{$year}");
+			}
+		}
+		// NGÀY
+		$start_i = 4;
+		foreach ($arr_sunday as $year => $row_month) {
+			foreach ($row_month as $month => $row_day) {
+				foreach ($row_day as $day) {
+					$start = PHPExcel_Cell::stringFromColumnIndex($start_i);
+					$this->excel->getActiveSheet()->getColumnDimension($start)->setWidth(5);
+					$this->excel->getActiveSheet()->getCell($start."7")->setValue("$day");
+					$start_i++;
+				}
+			}
+		}
+		/************TRUY VẤN*************/
+		$this->load->model("model_diemdanh");
+		$array_id_thieunhi=explode("|",$_POST["array_id_thieunhi"]);
+		$tn=array();
+		foreach ($array_id_thieunhi as $aidtn) {
+			$query = array();
+			$query[]=$this->model_diemdanh->get_value($id_namhoc,$aidtn);
+			$tn=array_merge($tn,$query);
+		}
+		$i=8;
+		/***************ĐIỂM DANH**************/
+		foreach($tn as $result){
+			/***********THÔNG TIN THIẾU NHI**********/
+			$id_thieunhi = $result["id_thieunhi"];
+			$mathieunhi  = $result["mathieunhi"];
+			$tenthanh    = $result["tenthanh"];
+			$hoten       = $result["hoten"];
+			$names       = $result["hoten"];
+	        $name_shift=explode(" ",$names);
+	        $count_array=count($name_shift)-1;
+	        $ten=$name_shift[$count_array];
+	        array_pop($name_shift);
+	        $ho=implode(" ", $name_shift);
+			/***********GHI GIA TRI VAO O**********/
+			$this->excel->getActiveSheet()->setCellValue('A'.$i,$mathieunhi);
+			$this->excel->getActiveSheet()->setCellValue('B'.$i,$tenthanh);
+			$this->excel->getActiveSheet()->setCellValue('C'.$i,$ho);
+			$this->excel->getActiveSheet()->setCellValue('D'.$i,$ten);
+			/***************ĐIỂM DANH**************/
+			$j=4;
+			foreach ($arr_sunday as $year => $row_month) {
+				foreach ($row_month as $month => $row_day) {
+					foreach ($row_day as $day) {
+						$day_com = $year."-".$month."-".$day;
+						$char = PHPExcel_Cell::stringFromColumnIndex($j);
+						foreach ($result["chuyencan"] as $cc) {
+							if($cc === $day_com){
+								$this->excel->getActiveSheet()->setCellValue($char.$i,"x");
+								break;
+							}
+						}
+						$j++;
+						
+					}
+				}
+			}
+			$i++;
+		}
+		/*********XUẤT FILE*********/
+		$filename="diemdanh_".$_SESSION["thongtinhuynhtruong"]["mahuynhtruong"].".xls";
 		$export = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
 		$export->save("./download/".$filename);
 		$fileurl=base_url()."download/".$filename;
