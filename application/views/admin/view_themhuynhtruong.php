@@ -1,4 +1,4 @@
-<div class="content-wrapper">
+﻿<div class="content-wrapper">
     <section class="content-header"><h1>thêm huynh trưởng</h1></section>
     <section class="content">
         <?php if(isset($alert)){alert($alert["stt"],$alert["title"],$alert["content"]);} ?>
@@ -32,7 +32,7 @@
                                         <div class="col-sm-9"><input type="type" class="form-control date" id="ngaysinh" name="ngaysinh"></div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="ngaybonmang" class="col-sm-3 control-label">Ngày bổn mạng</label>
+                                        <label for="ngaybonmang" class="col-sm-3 control-label">Ngày kính</label>
                                         <div class="col-sm-9"><input type="type" class="form-control date" id="ngaybonmang" name="ngaybonmang"></div>
                                     </div>
                                 </div>
@@ -47,7 +47,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="email" class="col-sm-3 control-label">Email</label>
-                                        <div class="col-sm-9"><input type="email" class="form-control" id="email" name="email" required></div>
+                                        <div class="col-sm-9"><input type="text" class="form-control" id="email" name="email" required></div>
                                     </div>
                                     <div class="form-group">
                                         <label for="caphuynhtruong" class="col-sm-3 control-label">Cấp huynh trưởng</label>

@@ -54,7 +54,7 @@
                                 <div class="col-sm-9"><input type="text" class="form-control date" id="ngaysinh" name="ngaysinh" value="<?php echo $result['ngaysinh'] ?>"></div>
                             </div>
                             <div class="form-group">
-                                <label for="ngaybonmang" class="col-sm-3 control-label">Ngày bổn mạng</label>
+                                <label for="ngaybonmang" class="col-sm-3 control-label">Ngày kính</label>
                                 <div class="col-sm-9"><input type="text" class="form-control date" id="ngaybonmang" name="ngaybonmang" value="<?php echo $result['ngaybonmang'] ?>"></div>
                             </div>
                         </div>
@@ -69,7 +69,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="email" class="col-sm-3 control-label">Email</label>
-                                <div class="col-sm-9"><input type="email" class="form-control" id="email" name="email" value="<?php echo $result['email'] ?>"></div>
+                                <div class="col-sm-9"><input type="text" class="form-control" id="email" name="email" value="<?php echo $result['email'] ?>"></div>
                             </div>
                             <div class="form-group">
                                 <label for="caphuynhtruong" class="col-sm-3 control-label">Cấp huynh trưởng</label>

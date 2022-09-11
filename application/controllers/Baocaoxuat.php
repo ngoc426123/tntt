@@ -55,7 +55,7 @@ class Baocaoxuat extends CI_Controller{
 			"hoten"         =>"HỌ TÊN",
 			"gioitinh"      =>"GIỚI TÍNH",
 			"ngaysinh"      =>"NGÀY SINH",
-			"ngaybonmang"   =>"NGÀY BỔN MẠNG",
+			"ngaybonmang"   =>"NGÀY KÍNH",
 			"diachi"        =>"ĐỊA CHỈ",
 			"sdt"           =>"SỐ ĐIỆN THOẠI",
 			"khugiao"       =>"KHU GIÁO",

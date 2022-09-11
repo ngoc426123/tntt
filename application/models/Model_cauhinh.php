@@ -13,11 +13,6 @@ class Model_cauhinh extends CI_Model{
 	private $heso_lamtron;
 	private $namhochientai;
 
-	public function __construct(){
-		parent::__construct();
-		$this->load->database();
-	}
-
 	public function set_value_heso($value_heso){
 		$this->heso_mieng_1 = $value_heso["heso_mieng_1"];
 		$this->heso_15p_1   = $value_heso["heso_15p_1"];

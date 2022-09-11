@@ -33,7 +33,7 @@
                                 <div class="col-sm-9"><input type="text" class="form-control date" id="ngaysinh" name="ngaysinh"></div>
                             </div>
                             <div class="form-group">
-                                <label for="ngaybonmang" class="col-sm-3 control-label">Ngày bổn mạng</label>
+                                <label for="ngaybonmang" class="col-sm-3 control-label">Ngày kính</label>
                                 <div class="col-sm-9"><input type="text" class="form-control date" id="ngaybonmang" name="ngaybonmang"></div>
                             </div>
                             <div class="form-group">
@@ -73,7 +73,7 @@
                                 <label for="hovatencha" class="col-sm-3 control-label">Họ và tên</label>
                                 <div class="col-sm-9"><input type="text" class="form-control" id="hovatencha" name="hotencha"></div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" style="display:none">
                                 <label for="nghenghiepcha" class="col-sm-3 control-label">Nghề nghiệp</label>
                                 <div class="col-sm-9"><input type="text" class="form-control" id="nghenghiepcha" name="nghenghiepcha"></div>
                             </div>
@@ -90,7 +90,7 @@
                                 <label for="hovatenme" class="col-sm-3 control-label">Họ và tên</label>
                                 <div class="col-sm-9"><input type="text" class="form-control" id="hovatenme" name="hotenme"></div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" style="display:none">
                                 <label for="nghenghiepme" class="col-sm-3 control-label">Nghề nghiệp</label>
                                 <div class="col-sm-9"><input type="text" class="form-control" id="nghenghiepme" name="nghenghiepme"></div>
                             </div>
@@ -124,7 +124,7 @@
                                 <div class="col-sm-9"><input type="text" class="form-control" id="linhmucruatoi" name="linhmucruatoi"></div>
                             </div>
                             <div class="form-group">
-                                <label for="nhathoruatoi" class="col-sm-3 control-label">Nhà thờ</label>
+                                <label for="nhathoruatoi" class="col-sm-3 control-label">Giáo xứ</label>
                                 <div class="col-sm-9"><input type="text" class="form-control" id="nhathoruatoi" name="nhathoruatoi"></div>
                             </div>
                         </div>
@@ -148,7 +148,7 @@
                                 <div class="col-sm-9"><input type="text" class="form-control" id="linhmucruocle" name="linhmucruocle"></div>
                             </div>
                             <div class="form-group">
-                                <label for="nhathoruocle" class="col-sm-3 control-label">Nhà thờ</label>
+                                <label for="nhathoruocle" class="col-sm-3 control-label">Giáo xứ</label>
                                 <div class="col-sm-9"><input type="text" class="form-control" id="nhathoruocle" name="nhathoruocle"></div>
                             </div>
                         </div>
@@ -172,7 +172,7 @@
                                 <div class="col-sm-9"><input type="text" class="form-control" id="linhmucthemsuc" name="linhmucthemsuc"></div>
                             </div>
                             <div class="form-group">
-                                <label for="nhathothemsuc" class="col-sm-3 control-label">Nhà thờ</label>
+                                <label for="nhathothemsuc" class="col-sm-3 control-label">Giáo xứ</label>
                                 <div class="col-sm-9"><input type="text" class="form-control" id="nhathothemsuc" name="nhathothemsuc"></div>
                             </div>
                         </div>

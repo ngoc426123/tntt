@@ -53,7 +53,7 @@
                                 <div class="col-sm-9"><input type="text" class="form-control date" id="ngaysinh" name="ngaysinh" value="<?php echo $result['ngaysinh']; ?>"></div>
                             </div>
                             <div class="form-group">
-                                <label for="ngaybonmang" class="col-sm-3 control-label">Ngày bổn mạng</label>
+                                <label for="ngaybonmang" class="col-sm-3 control-label">Ngày kính</label>
                                 <div class="col-sm-9"><input type="text" class="form-control date" id="ngaybonmang" name="ngaybonmang" value="<?php echo $result['ngaybonmang']; ?>"></div>
                             </div>
                             <div class="form-group">
@@ -122,7 +122,7 @@
                                 <label for="hovatencha" class="col-sm-3 control-label">Họ và tên</label>
                                 <div class="col-sm-9"><input type="text" class="form-control" id="hovatencha" name="hotencha" value="<?php echo $result['hotencha']; ?>"></div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" style="display:none">
                                 <label for="nghenghiepcha" class="col-sm-3 control-label">Nghề nghiệp</label>
                                 <div class="col-sm-9"><input type="text" class="form-control" id="nghenghiepcha" name="nghenghiepcha" value="<?php echo $result['nghenghiepcha']; ?>"></div>
                             </div>
@@ -139,7 +139,7 @@
                                 <label for="hovatenme" class="col-sm-3 control-label">Họ và tên</label>
                                 <div class="col-sm-9"><input type="text" class="form-control" id="hovatenme" name="hotenme" value="<?php echo $result['hotenme']; ?>"></div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" style="display:none">
                                 <label for="nghenghiepme" class="col-sm-3 control-label">Nghề nghiệp</label>
                                 <div class="col-sm-9"><input type="text" class="form-control" id="nghenghiepme" name="nghenghiepme" value="<?php echo $result['nghenghiepme']; ?>"></div>
                             </div>
@@ -195,7 +195,7 @@
                                 <div class="col-sm-9"><input type="text" class="form-control" id="linhmucruatoi" name="linhmucruatoi" value="<?php echo $result["linhmucruatoi"] ?>"></div>
                             </div>
                             <div class="form-group">
-                                <label for="nhathoruatoi" class="col-sm-3 control-label">Nhà thờ</label>
+                                <label for="nhathoruatoi" class="col-sm-3 control-label">Giáo xứ</label>
                                 <div class="col-sm-9"><input type="text" class="form-control" id="nhathoruatoi" name="nhathoruatoi" value="<?php echo $result["nhathoruatoi"] ?>"></div>
                             </div>
                         </div>
@@ -239,7 +239,7 @@
                                 <div class="col-sm-9"><input type="text" class="form-control" id="linhmucruocle" name="linhmucruocle" value="<?php echo $result["linhmucruocle"] ?>"></div>
                             </div>
                             <div class="form-group">
-                                <label for="nhathoruocle" class="col-sm-3 control-label">Nhà thờ</label>
+                                <label for="nhathoruocle" class="col-sm-3 control-label">Giáo xứ</label>
                                 <div class="col-sm-9"><input type="text" class="form-control" id="nhathoruocle" name="nhathoruocle" value="<?php echo $result["nhathoruocle"] ?>"></div>
                             </div>
                         </div>
@@ -283,7 +283,7 @@
                                 <div class="col-sm-9"><input type="text" class="form-control" id="linhmucthemsuc" name="linhmucthemsuc" value="<?php echo $result["linhmucthemsuc"] ?>"></div>
                             </div>
                             <div class="form-group">
-                                <label for="nhathothemsuc" class="col-sm-3 control-label">Nhà thờ</label>
+                                <label for="nhathothemsuc" class="col-sm-3 control-label">Giáo xứ</label>
                                 <div class="col-sm-9"><input type="text" class="form-control" id="nhathothemsuc" name="nhathothemsuc" value="<?php echo $result["nhathothemsuc"] ?>"></div>
                             </div>
                         </div>

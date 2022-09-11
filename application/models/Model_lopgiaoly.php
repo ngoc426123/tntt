@@ -4,11 +4,6 @@ class Model_lopgiaoly extends CI_Model{
 	private $tenlopgiaoly;
 	private $douutien;
 
-	public function __construct(){
-		parent::__construct();
-		$this->load->database();
-	}
-
 	public function set_value($value_lopgiaoly){
 		$this->id_lopgiaoly = $value_lopgiaoly["id_lopgiaoly"];
 		$this->tenlopgiaoly = $value_lopgiaoly["tenlopgiaoly"];

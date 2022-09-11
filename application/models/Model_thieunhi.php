@@ -1,10 +1,5 @@
 <?php
 class Model_thieunhi extends CI_Model{
-	public function __construct(){
-		parent::__construct();
-		$this->load->database();
-	}
-
 	public function get_value($id_thieunhi){
 		$query=$this->db->query("SELECT * FROM thieunhi WHERE id_thieunhi='$id_thieunhi'");
 		$result=$query->row_array();

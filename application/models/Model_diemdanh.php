@@ -1,10 +1,5 @@
 <?php
 class Model_diemdanh extends CI_Model{
-	public function __construct(){
-		parent::__construct();
-		$this->load->database();
-	}
-
 	public function add($id_phanlop,$ngaythang){
 		$this->db->query("INSERT INTO chuyencan VALUES(NULL,'$id_phanlop','$ngaythang','1','')");
 	}
